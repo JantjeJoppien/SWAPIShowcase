@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.gradle)
-    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -59,8 +59,12 @@ dependencies {
     implementation(libs.converter.moshi)
     implementation(libs.moshi.kotlin)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
 
-    kapt(libs.hilt.compiler)
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
 
