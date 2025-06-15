@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.home
+package dev.joppien.swapishowcase.ui.features.people
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,20 +9,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class HomeUiState(
+data class PeopleListUiState(
     val isLoading: Boolean = false,
-    val data: String = "Hello from HomeViewModel!",
+    val data: String = "Hello from PeopleListViewModel!",
     val error: String? = null
 )
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class PeopleListViewModel @Inject constructor(
     // Inject your repositories or use cases here
     // Example: private val movieRepository: MovieRepository,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(PeopleListUiState())
+    val uiState: StateFlow<PeopleListUiState> = _uiState.asStateFlow()
 
     init {
         loadInitialData()

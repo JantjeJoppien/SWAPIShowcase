@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.home
+package dev.joppien.swapishowcase.ui.features.transports
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,20 +9,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-data class HomeUiState(
+data class TransportListUiState(
     val isLoading: Boolean = false,
-    val data: String = "Hello from HomeViewModel!",
+    val data: String = "Hello from TransportListViewModel!",
     val error: String? = null
 )
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class TransportListViewModel @Inject constructor(
     // Inject your repositories or use cases here
     // Example: private val movieRepository: MovieRepository,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(TransportListUiState())
+    val uiState: StateFlow<TransportListUiState> = _uiState.asStateFlow()
 
     init {
         loadInitialData()
@@ -38,6 +38,7 @@ class HomeViewModel @Inject constructor(
             try {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
+                    data = "Initial data loaded successfully!"
                 )
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(

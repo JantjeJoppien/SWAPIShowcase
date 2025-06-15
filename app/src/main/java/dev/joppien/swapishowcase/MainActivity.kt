@@ -13,10 +13,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import dev.joppien.swapishowcase.ui.features.home.HomeScreen
+import dev.joppien.swapishowcase.ui.features.movies.MovieListScreen
+import dev.joppien.swapishowcase.ui.features.people.PeopleListScreen
+import dev.joppien.swapishowcase.ui.features.transports.TransportListScreen
 import dev.joppien.swapishowcase.ui.theme.MainTheme
 
 object AppDestinations {
     const val HOME_ROUTE = "home"
+    const val MOVIE_LIST_ROUTE = "movie_list"
+    const val PEOPLE_LIST_ROUTE = "people_list"
+    const val TRANSPORT_LIST_ROUTE = "transport_list"
 }
 
 @AndroidEntryPoint
@@ -45,7 +51,20 @@ fun AppNavigation() {
         startDestination = AppDestinations.HOME_ROUTE
     ) {
         composable(route = AppDestinations.HOME_ROUTE) {
-            HomeScreen()
+            HomeScreen(
+                onNavigateToMovieList = { navController.navigate(AppDestinations.MOVIE_LIST_ROUTE) },
+                onNavigateToPeopleList = { navController.navigate(AppDestinations.PEOPLE_LIST_ROUTE) },
+                onNavigateToTransportList = { navController.navigate(AppDestinations.TRANSPORT_LIST_ROUTE) },
+            )
+        }
+        composable(route = AppDestinations.MOVIE_LIST_ROUTE) {
+            MovieListScreen()
+        }
+        composable(route = AppDestinations.PEOPLE_LIST_ROUTE) {
+            PeopleListScreen()
+        }
+        composable(route = AppDestinations.TRANSPORT_LIST_ROUTE) {
+            TransportListScreen()
         }
 
     }

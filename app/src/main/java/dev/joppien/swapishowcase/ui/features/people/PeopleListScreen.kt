@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.home
+package dev.joppien.swapishowcase.ui.features.people
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -13,13 +13,13 @@ import dev.joppien.swapishowcase.ui.theme.MainTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel()
+fun PeopleListScreen(
+    viewModel: PeopleListViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Home") }) }
+        topBar = { TopAppBar(title = { Text("People") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -47,7 +47,7 @@ fun HomeScreen(
 @Composable
 fun YourFeatureScreenPreview() {
     MainTheme {
-        HomeScreen()
+        PeopleListScreen()
     }
 }
 
@@ -55,6 +55,6 @@ fun YourFeatureScreenPreview() {
 @Composable
 fun YourFeatureScreenDarkPreview() {
     MainTheme {
-        HomeScreen()
+        PeopleListScreen()
     }
 }
