@@ -17,6 +17,7 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 @Composable
 fun PersonDetailsScreen(
     navController: NavController,
+    personId: Int,
     viewModel: PersonDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -65,7 +66,7 @@ fun PersonDetailsScreen(
 fun PersonDetailsScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PersonDetailsScreen(navController = previewNavController)
+        PersonDetailsScreen(navController = previewNavController, personId = 1)
     }
 }
 
@@ -74,6 +75,6 @@ fun PersonDetailsScreenPreview() {
 fun PersonDetailsScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PersonDetailsScreen(navController = previewNavController)
+        PersonDetailsScreen(navController = previewNavController, personId = 1)
     }
 }

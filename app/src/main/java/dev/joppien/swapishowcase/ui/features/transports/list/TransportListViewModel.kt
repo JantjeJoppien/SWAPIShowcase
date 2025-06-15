@@ -30,9 +30,27 @@ class TransportListViewModel @Inject constructor() : ViewModel() {
                 _uiState.emit(
                     TransportListState(
                         listOf(
-                            SimpleVehicleUi(1, "Sand Crawler", "Digger Crawler", "150000"),
-                            SimpleVehicleUi(2, "T-16 skyhopper", "T-16 skyhopper", "100000"),
-                            SimpleVehicleUi(3, "X-34 landspeeder", "X-34 landspeeder", "100000"),
+                            SimpleTransportUi(
+                                1,
+                                TransportType.VEHICLE,
+                                "Sand Crawler",
+                                "Digger Crawler",
+                                "150000"
+                            ),
+                            SimpleTransportUi(
+                                2,
+                                TransportType.STARSHIP,
+                                "T-16 skyhopper",
+                                "T-16 skyhopper",
+                                "100000"
+                            ),
+                            SimpleTransportUi(
+                                3,
+                                TransportType.VEHICLE,
+                                "X-34 landspeeder",
+                                "X-34 landspeeder",
+                                "100000"
+                            ),
                         )
                     )
                 )

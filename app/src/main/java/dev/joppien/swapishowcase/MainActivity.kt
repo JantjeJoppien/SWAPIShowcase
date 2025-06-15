@@ -17,8 +17,11 @@ import dagger.hilt.android.AndroidEntryPoint
 import dev.joppien.swapishowcase.ui.features.home.HomeScreen
 import dev.joppien.swapishowcase.ui.features.movies.details.MovieDetailsScreen
 import dev.joppien.swapishowcase.ui.features.movies.list.MovieListScreen
+import dev.joppien.swapishowcase.ui.features.people.details.PersonDetailsScreen
 import dev.joppien.swapishowcase.ui.features.people.list.PeopleListScreen
 import dev.joppien.swapishowcase.ui.features.transports.list.TransportListScreen
+import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetailsScreen
+import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsScreen
 import dev.joppien.swapishowcase.ui.navigation.AppArgs
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.MainTheme
@@ -73,8 +76,56 @@ fun AppNavigation() {
         composable(route = AppDestinations.PEOPLE_LIST_ROUTE) {
             PeopleListScreen(navController = navController)
         }
+        composable(
+            route = AppDestinations.PERSON_DETAILS_ROUTE,
+            arguments = listOf(
+                navArgument(AppArgs.PERSON_ID_ARG) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val personId = backStackEntry.arguments?.getInt(AppArgs.PERSON_ID_ARG)
+            if (personId != null) {
+                PersonDetailsScreen(
+                    navController = navController,
+                    personId = personId,
+                )
+            }
+        }
         composable(route = AppDestinations.TRANSPORT_LIST_ROUTE) {
             TransportListScreen(navController = navController)
+        }
+        composable(
+            route = AppDestinations.VEHICLE_DETAILS_ROUTE,
+            arguments = listOf(
+                navArgument(AppArgs.TRANSPORT_ID_ARG) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val vehicleId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
+            if (vehicleId != null) {
+                VehicleDetailsScreen(
+                    navController = navController,
+                    vehicleId = vehicleId,
+                )
+            }
+        }
+        composable(
+            route = AppDestinations.STARSHIP_DETAILS_ROUTE,
+            arguments = listOf(
+                navArgument(AppArgs.TRANSPORT_ID_ARG) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val starshipId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
+            if (starshipId != null) {
+                StarshipDetailsScreen(
+                    navController = navController,
+                    starshipId = starshipId,
+                )
+            }
         }
 
     }

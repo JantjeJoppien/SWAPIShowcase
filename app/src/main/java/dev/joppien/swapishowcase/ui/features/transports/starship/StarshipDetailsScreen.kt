@@ -17,6 +17,7 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 @Composable
 fun StarshipDetailsScreen(
     navController: NavController,
+    starshipId: Int,
     viewModel: StarshipDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -68,7 +69,7 @@ fun StarshipDetailsScreen(
 fun StarshipDetailsScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        StarshipDetailsScreen(navController = previewNavController)
+        StarshipDetailsScreen(navController = previewNavController, starshipId = 1)
     }
 }
 
@@ -77,6 +78,6 @@ fun StarshipDetailsScreenPreview() {
 fun StarshipDetailsScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        StarshipDetailsScreen(navController = previewNavController)
+        StarshipDetailsScreen(navController = previewNavController, starshipId = 1)
     }
 }

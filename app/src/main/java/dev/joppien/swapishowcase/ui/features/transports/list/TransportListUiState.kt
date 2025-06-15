@@ -6,11 +6,16 @@ class TransportListLoadingState : TransportListUiState()
 
 class TransportListErrorState : TransportListUiState()
 
-class TransportListState(val movies: List<SimpleVehicleUi>) : TransportListUiState()
+class TransportListState(val vehicles: List<SimpleTransportUi>) : TransportListUiState()
 
-data class SimpleVehicleUi(
+data class SimpleTransportUi(
     val id: Int,
+    val type: TransportType,
     val name: String,
     val model: String,
     val costInCredits: String,
 )
+
+enum class TransportType {
+    VEHICLE, STARSHIP
+}

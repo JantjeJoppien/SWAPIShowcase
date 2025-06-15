@@ -1,6 +1,7 @@
 package dev.joppien.swapishowcase.ui.features.people.list
 
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -10,6 +11,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import dev.joppien.swapishowcase.ui.navigation.AppScreens
 import dev.joppien.swapishowcase.ui.theme.MainTheme
 import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
@@ -45,10 +47,13 @@ fun PeopleListScreen(
                 }
 
                 is PeopleListState -> {
-                    val movies = (uiState as PeopleListState).movies
-                    movies.forEach { movie ->
-                        Card {
-                            Text(movie.name)
+                    val people = (uiState as PeopleListState).people
+                    people.forEach { person ->
+                        Card(
+                            modifier = Modifier.clickable {
+                                navController.navigate("${AppScreens.PERSON_DETAILS_SCREEN}/${person.id}")
+                            }) {
+                            Text(person.name)
                         }
                     }
                 }
