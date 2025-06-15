@@ -51,18 +51,16 @@ fun AppNavigation() {
         startDestination = AppDestinations.HOME_ROUTE
     ) {
         composable(route = AppDestinations.HOME_ROUTE) {
-            HomeScreen(
-                navController = navController,
-            )
+            HomeScreen(navController = navController)
         }
         composable(route = AppDestinations.MOVIE_LIST_ROUTE) {
-            MovieListScreen()
+            MovieListScreen(navController = navController)
         }
         composable(route = AppDestinations.PEOPLE_LIST_ROUTE) {
-            PeopleListScreen()
+            PeopleListScreen(navController = navController)
         }
         composable(route = AppDestinations.TRANSPORT_LIST_ROUTE) {
-            TransportListScreen()
+            TransportListScreen(navController = navController)
         }
 
     }

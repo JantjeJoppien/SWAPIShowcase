@@ -28,7 +28,7 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -68,7 +68,7 @@ fun HomeScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun YourFeatureScreenPreview() {
+fun HomeScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
         HomeScreen(
@@ -79,7 +79,7 @@ fun YourFeatureScreenPreview() {
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun YourFeatureScreenDarkPreview() {
+fun HomeScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
         HomeScreen(

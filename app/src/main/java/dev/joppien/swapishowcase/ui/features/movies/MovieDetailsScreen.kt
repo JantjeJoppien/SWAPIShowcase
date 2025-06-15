@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.transports
+package dev.joppien.swapishowcase.ui.features.movies
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -15,14 +15,14 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransportListScreen(
+fun MovieDetailsScreen(
     navController: NavController,
-    viewModel: TransportListViewModel = hiltViewModel(),
+    viewModel: MovieDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Transports") }) }
+        topBar = { TopAppBar(title = { Text("Movies") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -48,18 +48,18 @@ fun TransportListScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun TransportListScreenPreview() {
+fun MovieDetailsScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        TransportListScreen(navController = previewNavController)
+        MovieDetailsScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun TransportListScreenDarkPreview() {
+fun MovieDetailsScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        TransportListScreen(navController = previewNavController)
+        MovieDetailsScreen(navController = previewNavController)
     }
 }

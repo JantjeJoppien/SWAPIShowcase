@@ -15,9 +15,9 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransportListScreen(
+fun SpaceshipDetailsScreen(
     navController: NavController,
-    viewModel: TransportListViewModel = hiltViewModel(),
+    viewModel: SpaceshipDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -48,18 +48,18 @@ fun TransportListScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun TransportListScreenPreview() {
+fun SpaceshipDetailsScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        TransportListScreen(navController = previewNavController)
+        SpaceshipDetailsScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun TransportListScreenDarkPreview() {
+fun SpaceshipDetailsScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        TransportListScreen(navController = previewNavController)
+        SpaceshipDetailsScreen(navController = previewNavController)
     }
 }

@@ -9,12 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PeopleListScreen(
-    viewModel: PeopleListViewModel = hiltViewModel()
+    navController: NavController,
+    viewModel: PeopleListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -45,16 +48,18 @@ fun PeopleListScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun YourFeatureScreenPreview() {
+fun PeopleListScreenPreview() {
+    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PeopleListScreen()
+        PeopleListScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun YourFeatureScreenDarkPreview() {
+fun PeopleListScreenDarkPreview() {
+    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PeopleListScreen()
+        PeopleListScreen(navController = previewNavController)
     }
 }

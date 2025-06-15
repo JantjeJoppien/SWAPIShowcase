@@ -9,12 +9,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieListScreen(
-    viewModel: MovieListViewModel = hiltViewModel()
+    navController: NavController,
+    viewModel: MovieListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -45,16 +48,18 @@ fun MovieListScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun YourFeatureScreenPreview() {
+fun MovieListScreenPreview() {
+    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        MovieListScreen()
+        MovieListScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun YourFeatureScreenDarkPreview() {
+fun MovieListScreenDarkPreview() {
+    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        MovieListScreen()
+        MovieListScreen(navController = previewNavController)
     }
 }
