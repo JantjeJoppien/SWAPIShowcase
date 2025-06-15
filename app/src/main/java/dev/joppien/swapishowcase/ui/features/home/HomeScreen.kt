@@ -19,14 +19,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import dev.joppien.swapishowcase.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onNavigateToMovieList: () -> Unit,
-    onNavigateToPeopleList: () -> Unit,
-    onNavigateToTransportList: () -> Unit,
+    navController: NavController,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -51,13 +52,13 @@ fun HomeScreen(
                 }
             } else {
                 Text(uiState.data)
-                Button(onClick = onNavigateToMovieList) {
+                Button(onClick = { navController.navigate(AppDestinations.MOVIE_LIST_ROUTE) }) {
                     Text("View All Movies")
                 }
-                Button(onClick = onNavigateToPeopleList) {
+                Button(onClick = { navController.navigate(AppDestinations.PEOPLE_LIST_ROUTE) }) {
                     Text("View All People")
                 }
-                Button(onClick = onNavigateToTransportList) {
+                Button(onClick = { navController.navigate(AppDestinations.TRANSPORT_LIST_ROUTE) }) {
                     Text("Hangar")
                 }
             }
@@ -68,11 +69,10 @@ fun HomeScreen(
 @Preview(showBackground = true)
 @Composable
 fun YourFeatureScreenPreview() {
+    val previewNavController = rememberPreviewNavController()
     MainTheme {
         HomeScreen(
-            onNavigateToMovieList = {},
-            onNavigateToPeopleList = {},
-            onNavigateToTransportList = {},
+            navController = previewNavController,
         )
     }
 }
@@ -80,11 +80,10 @@ fun YourFeatureScreenPreview() {
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun YourFeatureScreenDarkPreview() {
+    val previewNavController = rememberPreviewNavController()
     MainTheme {
         HomeScreen(
-            onNavigateToMovieList = {},
-            onNavigateToPeopleList = {},
-            onNavigateToTransportList = {},
+            navController = previewNavController
         )
     }
 }

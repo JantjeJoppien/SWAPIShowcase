@@ -17,7 +17,6 @@ data class MovieListUiState(
 
 @HiltViewModel
 class MovieListViewModel @Inject constructor(
-    // Inject your repositories or use cases here
     // Example: private val movieRepository: MovieRepository,
 ) : ViewModel() {
 

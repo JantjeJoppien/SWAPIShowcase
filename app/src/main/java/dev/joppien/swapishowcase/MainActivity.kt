@@ -52,9 +52,7 @@ fun AppNavigation() {
     ) {
         composable(route = AppDestinations.HOME_ROUTE) {
             HomeScreen(
-                onNavigateToMovieList = { navController.navigate(AppDestinations.MOVIE_LIST_ROUTE) },
-                onNavigateToPeopleList = { navController.navigate(AppDestinations.PEOPLE_LIST_ROUTE) },
-                onNavigateToTransportList = { navController.navigate(AppDestinations.TRANSPORT_LIST_ROUTE) },
+                navController = navController,
             )
         }
         composable(route = AppDestinations.MOVIE_LIST_ROUTE) {
