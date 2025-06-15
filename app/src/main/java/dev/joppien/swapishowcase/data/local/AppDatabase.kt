@@ -45,5 +45,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         const val DATABASE_NAME = "swapi_showcase_db"
+        const val DATABASE_CACHE_VALIDITY = 86400000L // 1 day
     }
 }
