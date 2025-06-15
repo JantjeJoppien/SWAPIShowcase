@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.movies
+package dev.joppien.swapishowcase.ui.features.people.details
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -15,14 +15,14 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieDetailsScreen(
+fun PersonDetailsScreen(
     navController: NavController,
-    viewModel: MovieDetailsViewModel = hiltViewModel(),
+    viewModel: PersonDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Movies") }) }
+        topBar = { TopAppBar(title = { Text("People") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -32,15 +32,29 @@ fun MovieDetailsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            if (uiState.isLoading) {
-                CircularProgressIndicator()
-            } else if (uiState.error != null) {
-                Text("Error: ${uiState.error}")
-                Button(onClick = { viewModel.refreshData() }) {
-                    Text("Retry")
+            when (uiState) {
+                is PersonDetailsLoadingState -> {
+                    CircularProgressIndicator()
                 }
-            } else {
-                Text(uiState.data)
+
+                is PersonDetailsErrorState -> {
+                    Text("Something went wrong!")
+                    Button(onClick = { viewModel.refreshData() }) {
+                        Text("Retry")
+                    }
+                }
+
+                is PersonDetailsState -> {
+                    val person = (uiState as PersonDetailsState)
+                    Text(person.name)
+                    Text(person.gender)
+                    Text(person.birthYear)
+                    Text(person.eyeColor)
+                    Text(person.hairColor)
+                    Text(person.skinColor)
+                    Text(person.height)
+                    Text(person.mass)
+                }
             }
         }
     }
@@ -48,18 +62,18 @@ fun MovieDetailsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun MovieDetailsScreenPreview() {
+fun PersonDetailsScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        MovieDetailsScreen(navController = previewNavController)
+        PersonDetailsScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun MovieDetailsScreenDarkPreview() {
+fun PersonDetailsScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        MovieDetailsScreen(navController = previewNavController)
+        PersonDetailsScreen(navController = previewNavController)
     }
 }

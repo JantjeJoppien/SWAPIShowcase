@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.transports
+package dev.joppien.swapishowcase.ui.features.people.list
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -15,14 +15,14 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TransportListScreen(
+fun PeopleListScreen(
     navController: NavController,
-    viewModel: TransportListViewModel = hiltViewModel(),
+    viewModel: PeopleListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Transports") }) }
+        topBar = { TopAppBar(title = { Text("People") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -32,15 +32,26 @@ fun TransportListScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            if (uiState.isLoading) {
-                CircularProgressIndicator()
-            } else if (uiState.error != null) {
-                Text("Error: ${uiState.error}")
-                Button(onClick = { viewModel.refreshData() }) {
-                    Text("Retry")
+            when (uiState) {
+                is PeopleListLoadingState -> {
+                    CircularProgressIndicator()
                 }
-            } else {
-                Text(uiState.data)
+
+                is PeopleListErrorState -> {
+                    Text("Something went wrong!")
+                    Button(onClick = { viewModel.refreshData() }) {
+                        Text("Retry")
+                    }
+                }
+
+                is PeopleListState -> {
+                    val movies = (uiState as PeopleListState).movies
+                    movies.forEach { movie ->
+                        Card {
+                            Text(movie.name)
+                        }
+                    }
+                }
             }
         }
     }
@@ -48,18 +59,18 @@ fun TransportListScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun TransportListScreenPreview() {
+fun PeopleListScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        TransportListScreen(navController = previewNavController)
+        PeopleListScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun TransportListScreenDarkPreview() {
+fun PeopleListScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        TransportListScreen(navController = previewNavController)
+        PeopleListScreen(navController = previewNavController)
     }
 }

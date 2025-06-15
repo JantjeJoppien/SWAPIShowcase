@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.people
+package dev.joppien.swapishowcase.ui.features.transports.list
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -15,14 +15,14 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PersonDetailsScreen(
+fun TransportListScreen(
     navController: NavController,
-    viewModel: PersonDetailsViewModel = hiltViewModel(),
+    viewModel: TransportListViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text("People") }) }
+        topBar = { TopAppBar(title = { Text("Transports") }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -32,15 +32,28 @@ fun PersonDetailsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            if (uiState.isLoading) {
-                CircularProgressIndicator()
-            } else if (uiState.error != null) {
-                Text("Error: ${uiState.error}")
-                Button(onClick = { viewModel.refreshData() }) {
-                    Text("Retry")
+            when (uiState) {
+                is TransportListLoadingState -> {
+                    CircularProgressIndicator()
                 }
-            } else {
-                Text(uiState.data)
+
+                is TransportListErrorState -> {
+                    Text("Something went wrong!")
+                    Button(onClick = { viewModel.refreshData() }) {
+                        Text("Retry")
+                    }
+                }
+
+                is TransportListState -> {
+                    val vehicles = (uiState as TransportListState).movies
+                    vehicles.forEach { vehicle ->
+                        Card {
+                            Text(vehicle.name)
+                            Text(vehicle.model)
+                            Text(vehicle.costInCredits)
+                        }
+                    }
+                }
             }
         }
     }
@@ -48,18 +61,18 @@ fun PersonDetailsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun PersonDetailsScreenPreview() {
+fun TransportListScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PersonDetailsScreen(navController = previewNavController)
+        TransportListScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun PersonDetailsScreenDarkPreview() {
+fun TransportListScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PersonDetailsScreen(navController = previewNavController)
+        TransportListScreen(navController = previewNavController)
     }
 }

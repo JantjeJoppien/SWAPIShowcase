@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.ui.features.transports
+package dev.joppien.swapishowcase.ui.features.transports.starship
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
@@ -15,9 +15,9 @@ import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SpaceshipDetailsScreen(
+fun StarshipDetailsScreen(
     navController: NavController,
-    viewModel: SpaceshipDetailsViewModel = hiltViewModel(),
+    viewModel: StarshipDetailsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
@@ -32,15 +32,32 @@ fun SpaceshipDetailsScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            if (uiState.isLoading) {
-                CircularProgressIndicator()
-            } else if (uiState.error != null) {
-                Text("Error: ${uiState.error}")
-                Button(onClick = { viewModel.refreshData() }) {
-                    Text("Retry")
+            when (uiState) {
+                is StarshipLoadingState -> {
+                    CircularProgressIndicator()
                 }
-            } else {
-                Text(uiState.data)
+
+                is StarshipErrorState -> {
+                    Text("Something went wrong!")
+                    Button(onClick = { viewModel.refreshData() }) {
+                        Text("Retry")
+                    }
+                }
+
+                is StarshipState -> {
+                    val starship = (uiState as StarshipState)
+                    Text(starship.name)
+                    Text(starship.model)
+                    Text(starship.starshipClass)
+                    Text(starship.manufacturer)
+                    Text(starship.costInCredits)
+                    Text(starship.length)
+                    Text(starship.maxAtmospheringSpeed)
+                    Text(starship.hyperdriveRating)
+                    Text(starship.mglt)
+                    Text(starship.cargoCapacity)
+                    Text(starship.consumables)
+                }
             }
         }
     }
@@ -48,18 +65,18 @@ fun SpaceshipDetailsScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun SpaceshipDetailsScreenPreview() {
+fun StarshipDetailsScreenPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        SpaceshipDetailsScreen(navController = previewNavController)
+        StarshipDetailsScreen(navController = previewNavController)
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun SpaceshipDetailsScreenDarkPreview() {
+fun StarshipDetailsScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
     MainTheme {
-        SpaceshipDetailsScreen(navController = previewNavController)
+        StarshipDetailsScreen(navController = previewNavController)
     }
 }

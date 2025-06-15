@@ -8,22 +8,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import dev.joppien.swapishowcase.ui.features.home.HomeScreen
-import dev.joppien.swapishowcase.ui.features.movies.MovieListScreen
-import dev.joppien.swapishowcase.ui.features.people.PeopleListScreen
-import dev.joppien.swapishowcase.ui.features.transports.TransportListScreen
+import dev.joppien.swapishowcase.ui.features.movies.details.MovieDetailsScreen
+import dev.joppien.swapishowcase.ui.features.movies.list.MovieListScreen
+import dev.joppien.swapishowcase.ui.features.people.list.PeopleListScreen
+import dev.joppien.swapishowcase.ui.features.transports.list.TransportListScreen
+import dev.joppien.swapishowcase.ui.navigation.AppArgs
+import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.MainTheme
-
-object AppDestinations {
-    const val HOME_ROUTE = "home"
-    const val MOVIE_LIST_ROUTE = "movie_list"
-    const val PEOPLE_LIST_ROUTE = "people_list"
-    const val TRANSPORT_LIST_ROUTE = "transport_list"
-}
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -55,6 +53,22 @@ fun AppNavigation() {
         }
         composable(route = AppDestinations.MOVIE_LIST_ROUTE) {
             MovieListScreen(navController = navController)
+        }
+        composable(
+            route = AppDestinations.MOVIE_DETAILS_ROUTE,
+            arguments = listOf(
+                navArgument(AppArgs.MOVIE_ID_ARG) {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry ->
+            val movieId = backStackEntry.arguments?.getInt(AppArgs.MOVIE_ID_ARG)
+            if (movieId != null) {
+                MovieDetailsScreen(
+                    navController = navController,
+                    movieId = movieId,
+                )
+            }
         }
         composable(route = AppDestinations.PEOPLE_LIST_ROUTE) {
             PeopleListScreen(navController = navController)
