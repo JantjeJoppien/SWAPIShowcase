@@ -1,9 +1,9 @@
 package dev.joppien.swapishowcase.data.local.entity
 
-import androidx.databinding.adapters.Converters
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import dev.joppien.swapishowcase.data.local.Converters
 import java.time.LocalDate
 
 @Entity(tableName = "movies")
