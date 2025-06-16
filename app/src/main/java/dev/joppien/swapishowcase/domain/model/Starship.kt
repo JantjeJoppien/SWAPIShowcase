@@ -1,11 +1,6 @@
-package dev.joppien.swapishowcase.data.local.entity
+package dev.joppien.swapishowcase.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "starships")
-data class StarshipEntity(
-    @PrimaryKey
+data class Starship(
     val id: Int,
     val name: String,
     val model: String,
@@ -20,5 +15,4 @@ data class StarshipEntity(
     val hyperdriveRating: String,
     val mglt: String,
     val starshipClass: String,
-    val lastRefreshed: Long = System.currentTimeMillis()
 )

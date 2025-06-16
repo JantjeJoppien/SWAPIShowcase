@@ -4,7 +4,9 @@ abstract class TransportListUiState
 
 class TransportListLoadingState : TransportListUiState()
 
-class TransportListErrorState : TransportListUiState()
+class TransportListEmptyState : TransportListUiState()
+
+class TransportListErrorState(exception: Throwable) : TransportListUiState()
 
 class TransportListState(val vehicles: List<SimpleTransportUi>) : TransportListUiState()
 

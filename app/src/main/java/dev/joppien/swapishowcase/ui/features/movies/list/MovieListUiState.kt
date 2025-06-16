@@ -4,7 +4,9 @@ abstract class MovieListUiState
 
 class MovieListLoadingState : MovieListUiState()
 
-class MovieListErrorState : MovieListUiState()
+class MovieListEmptyState : MovieListUiState()
+
+class MovieListErrorState(exception: Throwable) : MovieListUiState()
 
 class MovieListState(val movies: List<SimpleMovieUi>) : MovieListUiState()
 

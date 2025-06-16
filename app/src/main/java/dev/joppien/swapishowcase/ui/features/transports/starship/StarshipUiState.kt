@@ -4,7 +4,9 @@ abstract class StarshipUiState
 
 class StarshipLoadingState : StarshipUiState()
 
-class StarshipErrorState : StarshipUiState()
+class StarshipEmptyState : StarshipUiState()
+
+class StarshipErrorState(exception: Throwable) : StarshipUiState()
 
 class StarshipState(
     val name: String,

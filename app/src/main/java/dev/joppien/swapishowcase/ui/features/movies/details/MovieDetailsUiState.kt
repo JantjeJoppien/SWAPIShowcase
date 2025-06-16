@@ -4,7 +4,9 @@ abstract class MovieDetailsUiState
 
 class MovieDetailsLoadingState : MovieDetailsUiState()
 
-class MovieDetailsErrorState : MovieDetailsUiState()
+class MovieDetailsEmptyState : MovieDetailsUiState()
+
+class MovieDetailsErrorState(exception: Throwable) : MovieDetailsUiState()
 
 class MovieDetailsState(
     val id: Int,
@@ -12,6 +14,6 @@ class MovieDetailsState(
     val episodeId: Int,
     val releaseDate: String,
     val director: String,
-    val producer: List<String>,
+    val producers: List<String>,
     val openingCrawl: String,
 ) : MovieDetailsUiState()

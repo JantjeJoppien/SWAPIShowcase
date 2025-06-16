@@ -4,7 +4,9 @@ abstract class VehicleUiState
 
 class VehicleLoadingState : VehicleUiState()
 
-class VehicleErrorState : VehicleUiState()
+class VehicleEmptyState : VehicleUiState()
+
+class VehicleErrorState(exception: Throwable) : VehicleUiState()
 
 class VehicleState(
     val name: String,

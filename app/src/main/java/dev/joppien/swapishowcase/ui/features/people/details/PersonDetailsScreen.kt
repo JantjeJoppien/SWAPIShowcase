@@ -10,18 +10,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import dev.joppien.swapishowcase.ui.features.movies.details.MovieDetailsUiState
 import dev.joppien.swapishowcase.ui.theme.MainTheme
 import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PersonDetailsScreen(
-    navController: NavController,
-    personId: Int,
-    viewModel: PersonDetailsViewModel = hiltViewModel(),
+    viewModel: PersonDetailsViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    PersonScreenContent(uiState = uiState)
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun PersonScreenContent(
+    uiState: PersonDetailsUiState,
+) {
     Scaffold(
         topBar = { TopAppBar(title = { Text("People") }) }
     ) { paddingValues ->
@@ -40,13 +46,10 @@ fun PersonDetailsScreen(
 
                 is PersonDetailsErrorState -> {
                     Text("Something went wrong!")
-                    Button(onClick = { viewModel.refreshData() }) {
-                        Text("Retry")
-                    }
                 }
 
                 is PersonDetailsState -> {
-                    val person = (uiState as PersonDetailsState)
+                    val person = uiState
                     Text(person.name)
                     Text(person.gender)
                     Text(person.birthYear)
@@ -64,17 +67,37 @@ fun PersonDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 fun PersonDetailsScreenPreview() {
-    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PersonDetailsScreen(navController = previewNavController, personId = 1)
+        PersonScreenContent(
+            PersonDetailsState(
+                name = "Name",
+                gender = "Gender",
+                birthYear = "Birth Year",
+                eyeColor = "Eye Color",
+                hairColor = "Hair Color",
+                skinColor = "Skin Color",
+                height = "Height",
+                mass = "Mass",
+            )
+        )
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun PersonDetailsScreenDarkPreview() {
-    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        PersonDetailsScreen(navController = previewNavController, personId = 1)
+        PersonScreenContent(
+            PersonDetailsState(
+                name = "Name",
+                gender = "Gender",
+                birthYear = "Birth Year",
+                eyeColor = "Eye Color",
+                hairColor = "Hair Color",
+                skinColor = "Skin Color",
+                height = "Height",
+                mass = "Mass",
+            )
+        )
     }
 }

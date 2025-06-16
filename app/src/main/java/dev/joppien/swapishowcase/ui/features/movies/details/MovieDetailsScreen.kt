@@ -1,27 +1,38 @@
 package dev.joppien.swapishowcase.ui.features.movies.details
 
 import android.content.res.Configuration
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import dev.joppien.swapishowcase.ui.theme.MainTheme
-import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieDetailsScreen(
-    navController: NavController,
-    movieId: Int,
-    viewModel: MovieDetailsViewModel = hiltViewModel(),
+    viewModel: MovieDetailsViewModel,
 ) {
     val uiState by viewModel.uiState.collectAsState()
+    MovieScreenContent(uiState = uiState)
+}
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MovieScreenContent(
+    uiState: MovieDetailsUiState,
+) {
     Scaffold(
         topBar = { TopAppBar(title = { Text("Movies") }) }
     ) { paddingValues ->
@@ -40,18 +51,15 @@ fun MovieDetailsScreen(
 
                 is MovieDetailsErrorState -> {
                     Text("Something went wrong!")
-                    Button(onClick = { viewModel.refreshData() }) {
-                        Text("Retry")
-                    }
                 }
 
                 is MovieDetailsState -> {
-                    val movie = (uiState as MovieDetailsState)
+                    val movie = uiState
                     Text(movie.title)
                     Text(movie.episodeId.toString())
                     Text(movie.releaseDate)
                     Text(movie.director)
-                    Text(movie.producer.joinToString())
+                    Text(movie.producers.joinToString())
                     Text(movie.openingCrawl)
                 }
 
@@ -63,17 +71,35 @@ fun MovieDetailsScreen(
 @Preview(showBackground = true)
 @Composable
 fun MovieDetailsScreenPreview() {
-    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        MovieDetailsScreen(navController = previewNavController, movieId = 1)
+        MovieScreenContent(
+            MovieDetailsState(
+                id = 1,
+                title = "Title",
+                episodeId = 1,
+                releaseDate = "Release Date",
+                director = "Director",
+                producers = listOf("Producer 1", "Producer 2"),
+                openingCrawl = "Opening Crawl",
+            )
+        )
     }
 }
 
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun MovieDetailsScreenDarkPreview() {
-    val previewNavController = rememberPreviewNavController()
     MainTheme {
-        MovieDetailsScreen(navController = previewNavController, movieId = 1)
+        MovieScreenContent(
+            MovieDetailsState(
+                id = 1,
+                title = "Title",
+                episodeId = 1,
+                releaseDate = "Release Date",
+                director = "Director",
+                producers = listOf("Producer 1", "Producer 2"),
+                openingCrawl = "Opening Crawl",
+            )
+        )
     }
 }

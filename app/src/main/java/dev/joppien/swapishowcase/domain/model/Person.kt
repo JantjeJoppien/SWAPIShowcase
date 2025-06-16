@@ -1,11 +1,6 @@
-package dev.joppien.swapishowcase.data.local.entity
+package dev.joppien.swapishowcase.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "people")
-data class PersonEntity(
-    @PrimaryKey
+data class Person(
     val id: Int,
     val name: String,
     val height: Int?,
@@ -16,5 +11,4 @@ data class PersonEntity(
     val birthYear: String,
     val gender: String,
     val homeworldId: Int?,
-    val lastRefreshed: Long = System.currentTimeMillis()
 )

@@ -1,11 +1,6 @@
-package dev.joppien.swapishowcase.data.local.entity
+package dev.joppien.swapishowcase.domain.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-
-@Entity(tableName = "vehicles")
-data class VehicleEntity(
-    @PrimaryKey
+data class Vehicle(
     val id: Int,
     val name: String,
     val model: String,
@@ -18,5 +13,4 @@ data class VehicleEntity(
     val cargoCapacity: Long?,
     val consumables: String,
     val vehicleClass: String,
-    val lastRefreshed: Long = System.currentTimeMillis()
 )

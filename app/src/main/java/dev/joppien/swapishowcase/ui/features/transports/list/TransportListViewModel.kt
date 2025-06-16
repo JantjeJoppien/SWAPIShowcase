@@ -3,60 +3,60 @@ package dev.joppien.swapishowcase.ui.features.transports.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import dev.joppien.swapishowcase.domain.model.TransportItem
+import dev.joppien.swapishowcase.domain.usecases.transport.GetCombinedTransportsUseCase
+import dev.joppien.swapishowcase.domain.usecases.transport.RefreshTransportsUseCase
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class TransportListViewModel @Inject constructor() : ViewModel() {
+class TransportListViewModel @Inject constructor(
+    getCombinedTransports: GetCombinedTransportsUseCase,
+    val refreshTransports: RefreshTransportsUseCase,
+) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<TransportListUiState>(TransportListLoadingState())
-    val uiState: StateFlow<TransportListUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<TransportListUiState> =
+        getCombinedTransports()
+            .map { combinedTransportItems ->
+                if (combinedTransportItems.isNotEmpty()) {
+                    TransportListState(combinedTransportItems.map {
+                        SimpleTransportUi(
+                            id = it.id,
+                            type = when (it) {
+                                is TransportItem.VehicleItem -> TransportType.VEHICLE
+                                is TransportItem.StarshipItem -> TransportType.STARSHIP
+                            },
+                            name = it.name,
+                            model = it.model,
+                            costInCredits = it.costInCredits?.toString() ?: "Unknown"
+                        )
+                    })
+                } else {
+                    TransportListEmptyState()
+                }
+            }
+            .onStart<TransportListUiState> {
+                emit(TransportListLoadingState())
+            }
+            .catch<TransportListUiState> { exception ->
+                emit(TransportListErrorState(exception))
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = TransportListLoadingState()
+            )
 
-    init {
-        loadInitialData()
-    }
 
     fun refreshData() {
-        loadInitialData()
-    }
-
-    private fun loadInitialData() {
         viewModelScope.launch {
-            _uiState.emit(TransportListLoadingState())
-            try {
-                _uiState.emit(
-                    TransportListState(
-                        listOf(
-                            SimpleTransportUi(
-                                1,
-                                TransportType.VEHICLE,
-                                "Sand Crawler",
-                                "Digger Crawler",
-                                "150000"
-                            ),
-                            SimpleTransportUi(
-                                2,
-                                TransportType.STARSHIP,
-                                "T-16 skyhopper",
-                                "T-16 skyhopper",
-                                "100000"
-                            ),
-                            SimpleTransportUi(
-                                3,
-                                TransportType.VEHICLE,
-                                "X-34 landspeeder",
-                                "X-34 landspeeder",
-                                "100000"
-                            ),
-                        )
-                    )
-                )
-            } catch (e: Exception) {
-                _uiState.emit(TransportListErrorState())
-            }
+            refreshTransports()
         }
     }
 

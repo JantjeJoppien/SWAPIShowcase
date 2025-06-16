@@ -1,51 +1,59 @@
 package dev.joppien.swapishowcase.ui.features.transports.starship
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import dev.joppien.swapishowcase.domain.usecases.transport.GetStarshipByIdUseCase
+import dev.joppien.swapishowcase.ui.navigation.AppArgs
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class StarshipDetailsViewModel @Inject constructor() : ViewModel() {
+class StarshipDetailsViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    getStarshipById: GetStarshipByIdUseCase,
+) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<StarshipUiState>(StarshipLoadingState())
-    val uiState: StateFlow<StarshipUiState> = _uiState.asStateFlow()
+    private val starshipId: Int = savedStateHandle.get<Int>(AppArgs.TRANSPORT_ID_ARG)
+        ?: throw IllegalArgumentException("Starship ID not found in navigation arguments")
 
-    init {
-        loadInitialData()
-    }
-
-    fun refreshData() {
-        loadInitialData()
-    }
-
-    private fun loadInitialData() {
-        viewModelScope.launch {
-            _uiState.emit(StarshipLoadingState())
-            try {
-                _uiState.emit(
+    val uiState: StateFlow<StarshipUiState> =
+        getStarshipById(starshipId)
+            .map { starship ->
+                if (starship != null) {
                     StarshipState(
-                        name = "Death Star",
-                        model = "DS-1 Orbital Battle Station",
-                        starshipClass = "Deep Space Mobile Battlestation",
-                        manufacturer = "Imperial Department of Military Research, Sienar Fleet Systems",
-                        costInCredits = "1000000000000",
-                        length = "120000",
-                        maxAtmospheringSpeed = "n/a",
-                        hyperdriveRating = "4.0",
-                        mglt = "10",
-                        cargoCapacity = "1000000000000",
-                        consumables = "3 years",
+                        name = starship.name,
+                        model = starship.model,
+                        starshipClass = starship.starshipClass,
+                        manufacturer = starship.manufacturer,
+                        costInCredits = starship.costInCredits?.toString() ?: "Unknown",
+                        length = starship.length?.toString() ?: "Unknown",
+                        maxAtmospheringSpeed = starship.maxAtmospheringSpeed,
+                        hyperdriveRating = starship.hyperdriveRating,
+                        mglt = starship.mglt,
+                        cargoCapacity = starship.cargoCapacity?.toString() ?: "Unknown",
+                        consumables = starship.consumables
                     )
-                )
-            } catch (e: Exception) {
-                _uiState.emit(StarshipErrorState())
+                } else {
+                    StarshipEmptyState()
+                }
             }
-        }
-    }
+            .onStart<StarshipUiState> {
+                emit(StarshipLoadingState())
+            }
+            .catch<StarshipUiState> { exception ->
+                emit(StarshipErrorState(exception))
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = StarshipLoadingState()
+            )
 
 }
