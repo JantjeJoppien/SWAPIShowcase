@@ -25,18 +25,18 @@ class VehicleDetailsViewModel @Inject constructor(
 
     val uiState: StateFlow<VehicleUiState> =
         getVehicleById(vehicleId)
-            .map { vehicleItem ->
-                if (vehicleItem != null) {
+            .map { vehicle ->
+                if (vehicle != null) {
                     VehicleState(
-                        name = vehicleItem.name,
-                        model = vehicleItem.model,
-                        vehicleClass = vehicleItem.vehicleClass,
-                        manufacturer = vehicleItem.manufacturer,
-                        costInCredits = vehicleItem.costInCredits?.toString() ?: "Unknown",
-                        length = vehicleItem.length?.toString() ?: "Unknown",
-                        maxAtmospheringSpeed = vehicleItem.maxAtmospheringSpeed,
-                        cargoCapacity = vehicleItem.cargoCapacity?.toString() ?: "Unknown",
-                        consumables = vehicleItem.consumables
+                        name = vehicle.name,
+                        model = vehicle.model,
+                        vehicleClass = vehicle.vehicleClass,
+                        manufacturer = vehicle.manufacturer,
+                        costInCredits = vehicle.costInCredits?.toString() ?: "Unknown",
+                        length = vehicle.length?.toString() ?: "Unknown",
+                        maxAtmospheringSpeed = vehicle.maxAtmospheringSpeed,
+                        cargoCapacity = vehicle.cargoCapacity?.toString() ?: "Unknown",
+                        consumables = vehicle.consumables
                     )
                 } else {
                     VehicleEmptyState()

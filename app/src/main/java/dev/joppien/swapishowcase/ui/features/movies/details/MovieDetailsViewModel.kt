@@ -25,16 +25,16 @@ class MovieDetailsViewModel @Inject constructor(
 
     val uiState: StateFlow<MovieDetailsUiState> =
         getMovieById(movieId)
-            .map { movieItem ->
-                if (movieItem != null) {
+            .map { movie ->
+                if (movie != null) {
                     MovieDetailsState(
-                        id = movieItem.id,
-                        title = movieItem.title,
-                        episodeId = movieItem.episodeId,
-                        releaseDate = movieItem.releaseDate.toString(),
-                        director = movieItem.director,
-                        producers = movieItem.producers,
-                        openingCrawl = movieItem.openingCrawl
+                        id = movie.id,
+                        title = movie.title,
+                        episodeId = movie.episodeId,
+                        releaseDate = movie.releaseDate.toString(),
+                        director = movie.director,
+                        producers = movie.producers,
+                        openingCrawl = movie.openingCrawl
                     )
                 } else {
                     MovieDetailsEmptyState()

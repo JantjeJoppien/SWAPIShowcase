@@ -25,20 +25,20 @@ class StarshipDetailsViewModel @Inject constructor(
 
     val uiState: StateFlow<StarshipUiState> =
         getStarshipById(starshipId)
-            .map { starshipItem ->
-                if (starshipItem != null) {
+            .map { starship ->
+                if (starship != null) {
                     StarshipState(
-                        name = starshipItem.name,
-                        model = starshipItem.model,
-                        starshipClass = starshipItem.starshipClass,
-                        manufacturer = starshipItem.manufacturer,
-                        costInCredits = starshipItem.costInCredits?.toString() ?: "Unknown",
-                        length = starshipItem.length?.toString() ?: "Unknown",
-                        maxAtmospheringSpeed = starshipItem.maxAtmospheringSpeed,
-                        hyperdriveRating = starshipItem.hyperdriveRating,
-                        mglt = starshipItem.mglt,
-                        cargoCapacity = starshipItem.cargoCapacity?.toString() ?: "Unknown",
-                        consumables = starshipItem.consumables
+                        name = starship.name,
+                        model = starship.model,
+                        starshipClass = starship.starshipClass,
+                        manufacturer = starship.manufacturer,
+                        costInCredits = starship.costInCredits?.toString() ?: "Unknown",
+                        length = starship.length?.toString() ?: "Unknown",
+                        maxAtmospheringSpeed = starship.maxAtmospheringSpeed,
+                        hyperdriveRating = starship.hyperdriveRating,
+                        mglt = starship.mglt,
+                        cargoCapacity = starship.cargoCapacity?.toString() ?: "Unknown",
+                        consumables = starship.consumables
                     )
                 } else {
                     StarshipEmptyState()
