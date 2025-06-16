@@ -2,12 +2,14 @@ package dev.joppien.swapishowcase.data.repository
 
 import dev.joppien.swapishowcase.data.local.AppDatabase.Companion.DATABASE_CACHE_VALIDITY
 import dev.joppien.swapishowcase.data.local.dao.PersonDao
-import dev.joppien.swapishowcase.data.local.entity.PersonEntity
+import dev.joppien.swapishowcase.data.mappers.toDomain
 import dev.joppien.swapishowcase.data.mappers.toEntity
 import dev.joppien.swapishowcase.data.mappers.toEntityList
 import dev.joppien.swapishowcase.data.remote.api.SwapiClient
+import dev.joppien.swapishowcase.domain.model.Person
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,7 +22,7 @@ class PersonRepository @Inject constructor(
 
     //region Public API
 
-    fun getAllPeople(): Flow<List<PersonEntity>> =
+    fun getAllPeople(): Flow<List<Person>> =
         personDao.getAllPeople()
             .onStart {
                 try {
@@ -37,9 +39,9 @@ class PersonRepository @Inject constructor(
                     //ToDo: Handle error
                     println("Network error fetching all people: ${e.message}")
                 }
-            }
+            }.map { it.toDomain() }
 
-    fun getPersonById(id: Int): Flow<PersonEntity?> =
+    fun getPersonById(id: Int): Flow<Person?> =
         personDao.getPersonById(id)
             .onStart {
                 try {
@@ -58,7 +60,7 @@ class PersonRepository @Inject constructor(
                     //ToDo: Handle error
                     println("Network error fetching person by ID $id: ${e.message}")
                 }
-            }
+            }.map { it?.toDomain() }
 
     suspend fun refreshAllPeopleFromNetwork() {
         try {
