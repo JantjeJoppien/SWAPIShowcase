@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetMoviesUseCase @Inject constructor(
     private val moveRepository: MovieRepository,
 ) {
-    operator fun invoke(): Flow<List<Movie>?> {
+    operator fun invoke(): Flow<List<Movie>> {
         return moveRepository.getAllMovies()
     }
 }

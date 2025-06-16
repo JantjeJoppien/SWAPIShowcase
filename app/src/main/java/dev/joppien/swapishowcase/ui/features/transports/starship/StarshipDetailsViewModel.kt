@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class StarshipDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    getStarshipByIdUseCase: GetStarshipByIdUseCase,
+    getStarshipById: GetStarshipByIdUseCase,
 ) : ViewModel() {
 
     private val starshipId: Int = savedStateHandle.get<Int>(AppArgs.TRANSPORT_ID_ARG)
@@ -25,7 +25,7 @@ class StarshipDetailsViewModel @Inject constructor(
 
 
     val uiState: StateFlow<StarshipUiState> =
-        getStarshipByIdUseCase(starshipId)
+        getStarshipById(starshipId)
             .map { starshipItem ->
                 if (starshipItem != null) {
                     StarshipState(

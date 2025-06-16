@@ -17,12 +17,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TransportListViewModel @Inject constructor(
-    getCombinedTransportsUseCase: GetCombinedTransportsUseCase,
-    val refreshTransportsUseCase: RefreshTransportsUseCase,
+    getCombinedTransports: GetCombinedTransportsUseCase,
+    val refreshTransports: RefreshTransportsUseCase,
 ) : ViewModel() {
 
     val uiState: StateFlow<TransportListUiState> =
-        getCombinedTransportsUseCase()
+        getCombinedTransports()
             .map { combinedTransportItems ->
                 if (combinedTransportItems.isNotEmpty()) {
                     TransportListState(combinedTransportItems.map {
@@ -56,7 +56,7 @@ class TransportListViewModel @Inject constructor(
 
     fun refreshData() {
         viewModelScope.launch {
-            refreshTransportsUseCase()
+            refreshTransports()
         }
     }
 

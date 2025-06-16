@@ -17,14 +17,14 @@ import javax.inject.Inject
 @HiltViewModel
 class VehicleDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    getVehicleByIdUseCase: GetVehicleByIdUseCase,
+    getVehicleById: GetVehicleByIdUseCase,
 ) : ViewModel() {
 
     private val vehicleId: Int = savedStateHandle.get<Int>(AppArgs.TRANSPORT_ID_ARG)
         ?: throw IllegalArgumentException("Vehicle ID not found in navigation arguments")
 
     val uiState: StateFlow<VehicleUiState> =
-        getVehicleByIdUseCase(vehicleId)
+        getVehicleById(vehicleId)
             .map { vehicleItem ->
                 if (vehicleItem != null) {
                     VehicleState(
