@@ -23,7 +23,6 @@ class StarshipDetailsViewModel @Inject constructor(
     private val starshipId: Int = savedStateHandle.get<Int>(AppArgs.TRANSPORT_ID_ARG)
         ?: throw IllegalArgumentException("Starship ID not found in navigation arguments")
 
-
     val uiState: StateFlow<StarshipUiState> =
         getStarshipById(starshipId)
             .map { starshipItem ->

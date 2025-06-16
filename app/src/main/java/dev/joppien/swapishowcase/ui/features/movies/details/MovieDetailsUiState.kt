@@ -14,6 +14,6 @@ class MovieDetailsState(
     val episodeId: Int,
     val releaseDate: String,
     val director: String,
-    val producer: List<String>,
+    val producers: List<String>,
     val openingCrawl: String,
 ) : MovieDetailsUiState()

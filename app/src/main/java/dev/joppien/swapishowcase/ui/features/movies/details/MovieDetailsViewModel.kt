@@ -1,47 +1,55 @@
 package dev.joppien.swapishowcase.ui.features.movies.details
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import dev.joppien.swapishowcase.domain.usecases.movies.GetMovieByIdUseCase
+import dev.joppien.swapishowcase.ui.navigation.AppArgs
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailsViewModel @Inject constructor() : ViewModel() {
+class MovieDetailsViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    getMovieById: GetMovieByIdUseCase,
+) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<MovieDetailsUiState>(MovieDetailsLoadingState())
-    val uiState: StateFlow<MovieDetailsUiState> = _uiState.asStateFlow()
+    private val movieId: Int = savedStateHandle.get<Int>(AppArgs.MOVIE_ID_ARG)
+        ?: throw IllegalArgumentException("Movie ID not found in navigation arguments")
 
-    init {
-        loadInitialData()
-    }
-
-    fun refreshData() {
-        loadInitialData()
-    }
-
-    private fun loadInitialData() {
-        viewModelScope.launch {
-            _uiState.emit(MovieDetailsLoadingState())
-            try {
-                _uiState.emit(
+    val uiState: StateFlow<MovieDetailsUiState> =
+        getMovieById(movieId)
+            .map { movieItem ->
+                if (movieItem != null) {
                     MovieDetailsState(
-                        6,
-                        "Return of the Jedi",
-                        6,
-                        "1983-05-25",
-                        "Richard Marquand",
-                        listOf("Howard G. Kazanjian", "George Lucas", "Rick McCallum"),
-                        "Luke Skywalker once again falls into the dark side of the Force."
-                    ),
-                )
-            } catch (e: Exception) {
-                _uiState.emit(MovieDetailsErrorState())
+                        id = movieItem.id,
+                        title = movieItem.title,
+                        episodeId = movieItem.episodeId,
+                        releaseDate = movieItem.releaseDate.toString(),
+                        director = movieItem.director,
+                        producers = movieItem.producers,
+                        openingCrawl = movieItem.openingCrawl
+                    )
+                } else {
+                    MovieDetailsEmptyState()
+                }
             }
-        }
-    }
+            .onStart<MovieDetailsUiState> {
+                emit(MovieDetailsLoadingState())
+            }
+            .catch<MovieDetailsUiState> { exception ->
+                emit(MovieDetailsErrorState(exception))
+            }
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5000),
+                initialValue = MovieDetailsLoadingState()
+            )
 
 }
