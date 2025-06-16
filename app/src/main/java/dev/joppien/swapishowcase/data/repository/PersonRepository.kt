@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,8 +37,7 @@ class PersonRepository @Inject constructor(
                         personDao.insertAllPeople(networkPeopleDtoResults.toEntityList())
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching all people: ${e.message}")
+                    Timber.e(e, "Network error fetching all people")
                 }
             }.map { it.toDomain() }
 
@@ -57,8 +57,7 @@ class PersonRepository @Inject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching person by ID $id: ${e.message}")
+                    Timber.e(e, "Network error fetching person by ID")
                 }
             }.map { it?.toDomain() }
 
@@ -68,8 +67,7 @@ class PersonRepository @Inject constructor(
             personDao.deleteAllPeople()
             personDao.insertAllPeople(networkPeopleDtoResults.toEntityList())
         } catch (e: Exception) {
-            //ToDo: Handle error
-            println("Error refreshing people from network: ${e.message}")
+            Timber.e(e, "Error refreshing people from network")
         }
     }
 

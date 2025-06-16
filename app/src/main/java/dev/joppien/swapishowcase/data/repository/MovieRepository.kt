@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -40,8 +41,7 @@ class MovieRepository @Inject constructor(
                         movieDao.insertAllMovies(networkMoviesDto.toEntityList())
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching all movies: ${e.message}")
+                    Timber.e(e, "Network error fetching all movies")
                 }
             }.map { it.toDomain() }
 
@@ -65,8 +65,7 @@ class MovieRepository @Inject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching movie by ID $id: ${e.message}")
+                    Timber.e(e, "Network error fetching movie by ID")
                 }
             }.map { it?.toDomain() }
 
@@ -79,8 +78,7 @@ class MovieRepository @Inject constructor(
             movieDao.deleteAllMovies()
             movieDao.insertAllMovies(networkMoviesDto.toEntityList())
         } catch (e: Exception) {
-            //ToDo: Handle error
-            println("Error refreshing movies from network: ${e.message}")
+            Timber.e(e, "Error refreshing movies from network")
         }
     }
 

@@ -5,13 +5,14 @@ import dev.joppien.swapishowcase.data.remote.dto.MovieDTO
 import dev.joppien.swapishowcase.domain.model.Movie
 import dev.joppien.swapishowcase.util.extractIdFromUrl
 import dev.joppien.swapishowcase.util.toTrimmedStringList
+import timber.log.Timber
 
 fun MovieDTO.toEntity(): MovieEntity? {
     val id = extractIdFromUrl(this.url) ?: return null
     val releaseDate = try {
         java.time.LocalDate.parse(this.releaseDate)
     } catch (e: Exception) {
-        //ToDo: Handle parsing error
+        Timber.e(e, "Error extracting release date from movie")
         null
     }
 

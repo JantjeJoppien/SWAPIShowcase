@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,8 +37,7 @@ class SpeciesRepository @Inject constructor(
                         speciesDao.insertAllSpecies(networkSpeciesDtoResults.toEntityList())
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching all species: ${e.message}")
+                    Timber.e(e, "Network error fetching all species")
                 }
             }.map { it.toDomain() }
 
@@ -56,8 +56,7 @@ class SpeciesRepository @Inject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching species by ID $id: ${e.message}")
+                    Timber.e(e, "Network error fetching species by ID")
                 }
             }.map { it?.toDomain() }
 
@@ -67,8 +66,7 @@ class SpeciesRepository @Inject constructor(
             speciesDao.deleteAllSpecies()
             speciesDao.insertAllSpecies(networkSpeciesDtoResults.toEntityList())
         } catch (e: Exception) {
-            //ToDo: Handle error
-            println("Error refreshing species from network: ${e.message}")
+            Timber.e(e, "Error refreshing species from network")
         }
     }
 

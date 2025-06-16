@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,8 +37,7 @@ class StarshipRepository @Inject constructor(
                         starshipDao.insertAllStarships(networkStarshipsDtoResults.toEntityList())
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching all starships: ${e.message}")
+                    Timber.e(e, "Network error fetching all starships")
                 }
             }.map { it.toDomain() }
 
@@ -56,8 +56,7 @@ class StarshipRepository @Inject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching starship by ID $id: ${e.message}")
+                    Timber.e(e, "Network error fetching starship by ID")
                 }
             }.map { it?.toDomain() }
 
@@ -67,8 +66,7 @@ class StarshipRepository @Inject constructor(
             starshipDao.deleteAllStarships()
             starshipDao.insertAllStarships(networkStarshipsDtoResults.toEntityList())
         } catch (e: Exception) {
-            //ToDo: Handle error
-            println("Error refreshing starships from network: ${e.message}")
+            Timber.e(e, "Error refreshing starships from network")
         }
     }
 
