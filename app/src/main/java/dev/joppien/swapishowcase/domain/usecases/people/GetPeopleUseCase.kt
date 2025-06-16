@@ -8,7 +8,7 @@ import javax.inject.Inject
 class GetPeopleUseCase @Inject constructor(
     private val personRepository: PersonRepository,
 ) {
-    operator fun invoke(): Flow<List<Person>?> {
+    operator fun invoke(): Flow<List<Person>> {
         return personRepository.getAllPeople()
     }
 }
