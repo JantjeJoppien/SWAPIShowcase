@@ -17,8 +17,10 @@ import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
 import dev.joppien.swapishowcase.ui.features.home.HomeScreen
 import dev.joppien.swapishowcase.ui.features.movies.details.MovieDetailsScreen
+import dev.joppien.swapishowcase.ui.features.movies.details.MovieDetailsViewModel
 import dev.joppien.swapishowcase.ui.features.movies.list.MovieListScreen
 import dev.joppien.swapishowcase.ui.features.people.details.PersonDetailsScreen
+import dev.joppien.swapishowcase.ui.features.people.details.PersonDetailsViewModel
 import dev.joppien.swapishowcase.ui.features.people.list.PeopleListScreen
 import dev.joppien.swapishowcase.ui.features.transports.list.TransportListScreen
 import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetailsScreen
@@ -70,9 +72,9 @@ fun AppNavigation() {
         ) { backStackEntry ->
             val movieId = backStackEntry.arguments?.getInt(AppArgs.MOVIE_ID_ARG)
             if (movieId != null) {
+                val viewModel: MovieDetailsViewModel = hiltViewModel()
                 MovieDetailsScreen(
-                    navController = navController,
-                    movieId = movieId,
+                    viewModel = viewModel,
                 )
             }
         }
@@ -89,9 +91,9 @@ fun AppNavigation() {
         ) { backStackEntry ->
             val personId = backStackEntry.arguments?.getInt(AppArgs.PERSON_ID_ARG)
             if (personId != null) {
+                val viewModel: PersonDetailsViewModel = hiltViewModel()
                 PersonDetailsScreen(
-                    navController = navController,
-                    personId = personId,
+                    viewModel = viewModel,
                 )
             }
         }
