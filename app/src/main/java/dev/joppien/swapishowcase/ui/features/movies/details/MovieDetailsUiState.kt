@@ -4,7 +4,9 @@ abstract class MovieDetailsUiState
 
 class MovieDetailsLoadingState : MovieDetailsUiState()
 
-class MovieDetailsErrorState : MovieDetailsUiState()
+class MovieDetailsEmptyState : MovieDetailsUiState()
+
+class MovieDetailsErrorState(exception: Throwable) : MovieDetailsUiState()
 
 class MovieDetailsState(
     val id: Int,

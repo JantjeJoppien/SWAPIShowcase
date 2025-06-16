@@ -4,7 +4,9 @@ abstract class PersonDetailsUiState
 
 class PersonDetailsLoadingState : PersonDetailsUiState()
 
-class PersonDetailsErrorState : PersonDetailsUiState()
+class PersonDetailsEmptyState : PersonDetailsUiState()
+
+class PersonDetailsErrorState(exception: Throwable) : PersonDetailsUiState()
 
 class PersonDetailsState(
     val name: String,

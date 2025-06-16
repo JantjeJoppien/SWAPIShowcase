@@ -4,7 +4,9 @@ abstract class PeopleListUiState
 
 class PeopleListLoadingState : PeopleListUiState()
 
-class PeopleListErrorState : PeopleListUiState()
+class PeopleListEmptyState : PeopleListUiState()
+
+class PeopleListErrorState(exception: Throwable) : PeopleListUiState()
 
 class PeopleListState(val people: List<SimplePersonUi>) : PeopleListUiState()
 
