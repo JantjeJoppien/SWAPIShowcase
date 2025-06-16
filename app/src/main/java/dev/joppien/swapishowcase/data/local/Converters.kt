@@ -1,6 +1,7 @@
 package dev.joppien.swapishowcase.data.local
 
 import androidx.room.TypeConverter
+import timber.log.Timber
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -18,7 +19,7 @@ class Converters {
             try {
                 LocalDate.parse(it, formatter)
             } catch (e: Exception) {
-                //ToDo: Handle parsing error
+                Timber.e(e, "Error parsing String to Date")
                 null
             }
         }

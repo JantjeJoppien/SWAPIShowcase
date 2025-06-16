@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -36,8 +37,7 @@ class PlanetRepository @Inject constructor(
                         planetDao.insertAllPlanets(networkPlanetsDtoResults.toEntityList())
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching all planets: ${e.message}")
+                    Timber.e(e, "Network error fetching all planets")
                 }
             }.map { it.toDomain() }
 
@@ -56,8 +56,7 @@ class PlanetRepository @Inject constructor(
                         }
                     }
                 } catch (e: Exception) {
-                    //ToDo: Handle error
-                    println("Network error fetching planet by ID $id: ${e.message}")
+                    Timber.e(e, "Network error fetching planet by ID")
                 }
             }.map { it?.toDomain() }
 
@@ -67,8 +66,7 @@ class PlanetRepository @Inject constructor(
             planetDao.deleteAllPlanets()
             planetDao.insertAllPlanets(networkPlanetsDtoResults.toEntityList())
         } catch (e: Exception) {
-            //ToDo: Handle error
-            println("Error refreshing planets from network: ${e.message}")
+            Timber.e(e, "Error refreshing planets from network")
         }
     }
 
