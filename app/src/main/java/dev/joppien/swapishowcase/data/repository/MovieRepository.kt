@@ -5,7 +5,7 @@ import dev.joppien.swapishowcase.data.local.dao.MovieDao
 import dev.joppien.swapishowcase.data.mappers.toDomain
 import dev.joppien.swapishowcase.data.mappers.toEntity
 import dev.joppien.swapishowcase.data.mappers.toEntityList
-import dev.joppien.swapishowcase.data.remote.api.SwapiClient
+import dev.joppien.swapishowcase.data.remote.api.SwapiService
 import dev.joppien.swapishowcase.domain.model.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class MovieRepository @Inject constructor(
-    private val swapiClient: SwapiClient,
+    private val swapiService: SwapiService,
     private val movieDao: MovieDao,
 ) {
 
@@ -35,7 +35,7 @@ class MovieRepository @Inject constructor(
                     if (currentCache.isNullOrEmpty()
                         || currentCache.any { it.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY }
                     ) {
-                        val networkMoviesDto = swapiClient.swapiService.getAllMovies().results
+                        val networkMoviesDto = swapiService.getAllMovies().results
                         movieDao.deleteAllMovies()
                         movieDao.insertAllMovies(networkMoviesDto.toEntityList())
                     }
@@ -58,7 +58,7 @@ class MovieRepository @Inject constructor(
                     if (currentCachedMovie == null
                         || currentCachedMovie.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY
                     ) {
-                        val networkMovieDto = swapiClient.swapiService.getMovieById(id)
+                        val networkMovieDto = swapiService.getMovieById(id)
                         val movieEntity = networkMovieDto.toEntity()
                         if (movieEntity != null) {
                             movieDao.insertMovie(movieEntity)
@@ -75,7 +75,7 @@ class MovieRepository @Inject constructor(
      */
     suspend fun refreshAllMoviesFromNetwork() {
         try {
-            val networkMoviesDto = swapiClient.swapiService.getAllMovies().results
+            val networkMoviesDto = swapiService.getAllMovies().results
             movieDao.deleteAllMovies()
             movieDao.insertAllMovies(networkMoviesDto.toEntityList())
         } catch (e: Exception) {

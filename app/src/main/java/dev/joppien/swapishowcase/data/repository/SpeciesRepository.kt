@@ -5,7 +5,7 @@ import dev.joppien.swapishowcase.data.local.dao.SpeciesDao
 import dev.joppien.swapishowcase.data.mappers.toDomain
 import dev.joppien.swapishowcase.data.mappers.toEntity
 import dev.joppien.swapishowcase.data.mappers.toEntityList
-import dev.joppien.swapishowcase.data.remote.api.SwapiClient
+import dev.joppien.swapishowcase.data.remote.api.SwapiService
 import dev.joppien.swapishowcase.domain.model.Species
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class SpeciesRepository @Inject constructor(
-    private val swapiClient: SwapiClient,
+    private val swapiService: SwapiService,
     private val speciesDao: SpeciesDao,
 ) {
 
@@ -31,7 +31,7 @@ class SpeciesRepository @Inject constructor(
                         currentCache.any { it.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY }
                     ) {
                         val networkSpeciesDtoResults =
-                            swapiClient.swapiService.getAllSpecies().results
+                            swapiService.getAllSpecies().results
                         speciesDao.deleteAllSpecies()
                         speciesDao.insertAllSpecies(networkSpeciesDtoResults.toEntityList())
                     }
@@ -49,7 +49,7 @@ class SpeciesRepository @Inject constructor(
                     if (currentCachedSpecies == null ||
                         currentCachedSpecies.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY
                     ) {
-                        val networkSpeciesDto = swapiClient.swapiService.getSpeciesById(id)
+                        val networkSpeciesDto = swapiService.getSpeciesById(id)
                         val speciesEntity = networkSpeciesDto.toEntity()
                         if (speciesEntity != null) {
                             speciesDao.insertSpecies(speciesEntity)
@@ -63,7 +63,7 @@ class SpeciesRepository @Inject constructor(
 
     suspend fun refreshAllSpeciesFromNetwork() {
         try {
-            val networkSpeciesDtoResults = swapiClient.swapiService.getAllSpecies().results
+            val networkSpeciesDtoResults = swapiService.getAllSpecies().results
             speciesDao.deleteAllSpecies()
             speciesDao.insertAllSpecies(networkSpeciesDtoResults.toEntityList())
         } catch (e: Exception) {

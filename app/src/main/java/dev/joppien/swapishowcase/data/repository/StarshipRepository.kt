@@ -5,7 +5,7 @@ import dev.joppien.swapishowcase.data.local.dao.StarshipDao
 import dev.joppien.swapishowcase.data.mappers.toDomain
 import dev.joppien.swapishowcase.data.mappers.toEntity
 import dev.joppien.swapishowcase.data.mappers.toEntityList
-import dev.joppien.swapishowcase.data.remote.api.SwapiClient
+import dev.joppien.swapishowcase.data.remote.api.SwapiService
 import dev.joppien.swapishowcase.domain.model.Starship
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class StarshipRepository @Inject constructor(
-    private val swapiClient: SwapiClient,
+    private val swapiService: SwapiService,
     private val starshipDao: StarshipDao,
 ) {
 
@@ -31,7 +31,7 @@ class StarshipRepository @Inject constructor(
                         currentCache.any { it.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY }
                     ) {
                         val networkStarshipsDtoResults =
-                            swapiClient.swapiService.getAllStarships().results
+                            swapiService.getAllStarships().results
                         starshipDao.deleteAllStarships()
                         starshipDao.insertAllStarships(networkStarshipsDtoResults.toEntityList())
                     }
@@ -49,7 +49,7 @@ class StarshipRepository @Inject constructor(
                     if (currentCachedStarship == null ||
                         currentCachedStarship.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY
                     ) {
-                        val networkStarshipDto = swapiClient.swapiService.getStarshipById(id)
+                        val networkStarshipDto = swapiService.getStarshipById(id)
                         val starshipEntity = networkStarshipDto.toEntity()
                         if (starshipEntity != null) {
                             starshipDao.insertStarship(starshipEntity)
@@ -63,7 +63,7 @@ class StarshipRepository @Inject constructor(
 
     suspend fun refreshAllStarshipsFromNetwork() {
         try {
-            val networkStarshipsDtoResults = swapiClient.swapiService.getAllStarships().results
+            val networkStarshipsDtoResults = swapiService.getAllStarships().results
             starshipDao.deleteAllStarships()
             starshipDao.insertAllStarships(networkStarshipsDtoResults.toEntityList())
         } catch (e: Exception) {

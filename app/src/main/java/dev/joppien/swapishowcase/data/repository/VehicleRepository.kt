@@ -5,7 +5,7 @@ import dev.joppien.swapishowcase.data.local.dao.VehicleDao
 import dev.joppien.swapishowcase.data.mappers.toDomain
 import dev.joppien.swapishowcase.data.mappers.toEntity
 import dev.joppien.swapishowcase.data.mappers.toEntityList
-import dev.joppien.swapishowcase.data.remote.api.SwapiClient
+import dev.joppien.swapishowcase.data.remote.api.SwapiService
 import dev.joppien.swapishowcase.domain.model.Vehicle
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
@@ -16,7 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class VehicleRepository @Inject constructor(
-    private val swapiClient: SwapiClient,
+    private val swapiService: SwapiService,
     private val vehicleDao: VehicleDao,
 ) {
 
@@ -31,7 +31,7 @@ class VehicleRepository @Inject constructor(
                         currentCache.any { it.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY }
                     ) {
                         val networkVehiclesDtoResults =
-                            swapiClient.swapiService.getAllVehicles().results
+                            swapiService.getAllVehicles().results
                         vehicleDao.deleteAllVehicles()
                         vehicleDao.insertAllVehicles(networkVehiclesDtoResults.toEntityList())
                     }
@@ -49,7 +49,7 @@ class VehicleRepository @Inject constructor(
                     if (currentCachedVehicle == null ||
                         currentCachedVehicle.lastRefreshed < System.currentTimeMillis() - DATABASE_CACHE_VALIDITY
                     ) {
-                        val networkVehicleDto = swapiClient.swapiService.getVehicleById(id)
+                        val networkVehicleDto = swapiService.getVehicleById(id)
                         val vehicleEntity = networkVehicleDto.toEntity()
                         if (vehicleEntity != null) {
                             vehicleDao.insertVehicle(vehicleEntity)
@@ -63,7 +63,7 @@ class VehicleRepository @Inject constructor(
 
     suspend fun refreshAllVehiclesFromNetwork() {
         try {
-            val networkVehiclesDtoResults = swapiClient.swapiService.getAllVehicles().results
+            val networkVehiclesDtoResults = swapiService.getAllVehicles().results
             vehicleDao.deleteAllVehicles()
             vehicleDao.insertAllVehicles(networkVehiclesDtoResults.toEntityList())
         } catch (e: Exception) {
