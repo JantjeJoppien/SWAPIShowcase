@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,7 +22,9 @@ import dev.joppien.swapishowcase.ui.features.people.details.PersonDetailsScreen
 import dev.joppien.swapishowcase.ui.features.people.list.PeopleListScreen
 import dev.joppien.swapishowcase.ui.features.transports.list.TransportListScreen
 import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetailsScreen
+import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetailsViewModel
 import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsScreen
+import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsViewModel
 import dev.joppien.swapishowcase.ui.navigation.AppArgs
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.MainTheme
@@ -105,10 +108,8 @@ fun AppNavigation() {
         ) { backStackEntry ->
             val vehicleId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
             if (vehicleId != null) {
-                VehicleDetailsScreen(
-                    navController = navController,
-                    vehicleId = vehicleId,
-                )
+                val viewModel: VehicleDetailsViewModel = hiltViewModel()
+                VehicleDetailsScreen(viewModel = viewModel)
             }
         }
         composable(
@@ -121,9 +122,9 @@ fun AppNavigation() {
         ) { backStackEntry ->
             val starshipId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
             if (starshipId != null) {
+                val viewModel: StarshipDetailsViewModel = hiltViewModel()
                 StarshipDetailsScreen(
-                    navController = navController,
-                    starshipId = starshipId,
+                    viewModel = viewModel,
                 )
             }
         }

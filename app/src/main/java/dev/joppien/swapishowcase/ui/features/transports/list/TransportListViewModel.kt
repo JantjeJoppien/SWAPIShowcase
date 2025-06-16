@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.joppien.swapishowcase.domain.model.TransportItem
-import dev.joppien.swapishowcase.domain.usecases.GetCombinedTransportsUseCase
-import dev.joppien.swapishowcase.domain.usecases.RefreshTransportsUseCase
+import dev.joppien.swapishowcase.domain.usecases.transport.GetCombinedTransportsUseCase
+import dev.joppien.swapishowcase.domain.usecases.transport.RefreshTransportsUseCase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

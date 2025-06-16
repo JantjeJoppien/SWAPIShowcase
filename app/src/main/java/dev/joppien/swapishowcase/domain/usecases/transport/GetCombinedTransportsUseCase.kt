@@ -1,4 +1,4 @@
-package dev.joppien.swapishowcase.domain.usecases
+package dev.joppien.swapishowcase.domain.usecases.transport
 
 import dev.joppien.swapishowcase.data.repository.StarshipRepository
 import dev.joppien.swapishowcase.data.repository.VehicleRepository
