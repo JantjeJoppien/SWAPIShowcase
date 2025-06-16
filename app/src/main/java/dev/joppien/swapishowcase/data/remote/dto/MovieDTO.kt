@@ -19,7 +19,7 @@ data class MovieDTO(
     val director: String,
 
     @Json(name = "producer")
-    val producer: String,
+    val producers: String,
 
     @Json(name = "release_date")
     val releaseDate: String,

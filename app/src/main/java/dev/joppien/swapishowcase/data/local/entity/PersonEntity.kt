@@ -8,8 +8,8 @@ data class PersonEntity(
     @PrimaryKey
     val id: Int,
     val name: String,
-    val height: String,
-    val mass: String,
+    val height: Int?,
+    val mass: Int?,
     val hairColor: String,
     val skinColor: String,
     val eyeColor: String,

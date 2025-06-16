@@ -3,7 +3,6 @@ package dev.joppien.swapishowcase.data.local.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-// Changed table name to avoid conflict with SQL keyword
 @Entity(tableName = "species_table")
 data class SpeciesEntity(
     @PrimaryKey
@@ -11,11 +10,11 @@ data class SpeciesEntity(
     val name: String,
     val classification: String,
     val designation: String,
-    val averageHeight: String,
+    val averageHeight: Double?,
     val skinColors: String,
     val hairColors: String,
     val eyeColors: String,
-    val averageLifespan: String,
+    val averageLifespan: Double?,
     val homeworldId: Int?,
     val language: String,
     val lastRefreshed: Long = System.currentTimeMillis()

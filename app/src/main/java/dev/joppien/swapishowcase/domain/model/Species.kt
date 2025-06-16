@@ -5,11 +5,11 @@ data class Species(
     val name: String,
     val classification: String,
     val designation: String,
-    val averageHeight: Double,
+    val averageHeight: Double?,
     val skinColors: List<String>,
     val hairColors: List<String>,
     val eyeColors: List<String>,
-    val averageLifespan: Double,
+    val averageLifespan: Double?,
     val homeworldId: Int?,
     val language: String,
 )

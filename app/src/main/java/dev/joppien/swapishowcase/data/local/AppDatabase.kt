@@ -25,7 +25,7 @@ import dev.joppien.swapishowcase.data.local.entity.VehicleEntity
         VehicleEntity::class,
         SpeciesEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 @TypeConverters(Converters::class)

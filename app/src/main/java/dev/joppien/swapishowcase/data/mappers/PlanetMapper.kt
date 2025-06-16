@@ -2,6 +2,7 @@ package dev.joppien.swapishowcase.data.mappers
 
 import dev.joppien.swapishowcase.data.local.entity.PlanetEntity
 import dev.joppien.swapishowcase.data.remote.dto.PlanetDTO
+import dev.joppien.swapishowcase.domain.model.Planet
 import dev.joppien.swapishowcase.util.extractIdFromUrl
 
 fun PlanetDTO.toEntity(): PlanetEntity? {
@@ -22,4 +23,23 @@ fun PlanetDTO.toEntity(): PlanetEntity? {
 
 fun List<PlanetDTO>.toEntityList(): List<PlanetEntity> {
     return this.mapNotNull { it.toEntity() }
+}
+
+fun PlanetEntity.toDomain(): Planet {
+    return Planet(
+        id = this.id,
+        name = this.name,
+        rotationPeriod = this.rotationPeriod,
+        orbitalPeriod = this.orbitalPeriod,
+        diameter = this.diameter,
+        climate = this.climate,
+        gravity = this.gravity,
+        terrain = this.terrain,
+        surfaceWater = this.surfaceWater,
+        population = this.population,
+    )
+}
+
+fun List<PlanetEntity>.toDomain(): List<Planet> {
+    return this.map { it.toDomain() }
 }

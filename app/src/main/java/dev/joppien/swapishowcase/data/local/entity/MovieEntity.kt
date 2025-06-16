@@ -15,8 +15,7 @@ data class MovieEntity(
     val episodeId: Int,
     val openingCrawl: String,
     val director: String,
-    val producer: String,
+    val producers: String,
     val releaseDate: LocalDate?,
-    val charactersUrls: String,
     val lastRefreshed: Long = System.currentTimeMillis()
 )

@@ -8,6 +8,6 @@ data class Movie(
     val episodeId: Int,
     val openingCrawl: String,
     val director: String,
-    val producer: String,
+    val producers: List<String>,
     val releaseDate: LocalDate?,
 )
