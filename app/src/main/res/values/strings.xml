@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">SWAPI Showcase</string>
+    <string name="app.name" translatable="false">SWAPI Showcase</string>
+    <string name="feature.movies.title">Holocron</string>
+    <string name="feature.people.tile">Personnel Files</string>
+    <string name="feature.transport.title">Hangar</string>
+    <string name="feature.home.title">Base</string>
+    <string name="general.button.refresh">Refresh</string>
 </resources>

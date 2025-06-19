@@ -15,8 +15,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.joppien.swapishowcase.R
 import dev.joppien.swapishowcase.ui.theme.MainTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +36,16 @@ fun MovieScreenContent(
     uiState: MovieDetailsUiState,
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Movies") }) }
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = if (uiState is MovieDetailsState)
+                        uiState.title
+                    else
+                        stringResource(R.string.feature_movies_title)
+                )
+            })
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -55,7 +66,6 @@ fun MovieScreenContent(
 
                 is MovieDetailsState -> {
                     val movie = uiState
-                    Text(movie.title)
                     Text(movie.episodeId.toString())
                     Text(movie.releaseDate)
                     Text(movie.director)

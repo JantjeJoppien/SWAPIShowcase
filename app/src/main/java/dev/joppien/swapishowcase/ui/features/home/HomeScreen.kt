@@ -13,10 +13,12 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import dev.joppien.swapishowcase.R
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.MainTheme
 import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
@@ -28,7 +30,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Home") }) }
+        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.feature_home_title)) }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -40,13 +42,13 @@ fun HomeScreen(
         ) {
 
             Button(onClick = { navController.navigate(AppDestinations.MOVIE_LIST_ROUTE) }) {
-                Text("View All Movies")
+                Text(text = stringResource(R.string.feature_movies_title))
             }
             Button(onClick = { navController.navigate(AppDestinations.PEOPLE_LIST_ROUTE) }) {
-                Text("View All People")
+                Text(text = stringResource(R.string.feature_people_tile))
             }
             Button(onClick = { navController.navigate(AppDestinations.TRANSPORT_LIST_ROUTE) }) {
-                Text("Hangar")
+                Text(text = stringResource(R.string.feature_transport_title))
             }
         }
     }
