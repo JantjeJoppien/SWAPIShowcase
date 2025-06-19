@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature.movies.title">Holocron</string>
+    <string name="feature.people.tile">Personenregister</string>
+    <string name="feature.transport.title">Hangar</string>
+    <string name="feature.home.title">Basis</string>
+    <string name="general.button.refresh">Neu laden</string>
+</resources>

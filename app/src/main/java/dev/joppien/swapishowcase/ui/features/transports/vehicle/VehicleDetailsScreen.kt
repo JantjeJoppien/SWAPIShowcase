@@ -15,8 +15,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import dev.joppien.swapishowcase.R
 import dev.joppien.swapishowcase.ui.theme.MainTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -34,7 +36,16 @@ fun VehicleScreenContent(
     uiState: VehicleUiState
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Transports") }) }
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = if (uiState is VehicleState)
+                        uiState.name
+                    else
+                        stringResource(R.string.feature_transport_title)
+                )
+            })
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -55,7 +66,6 @@ fun VehicleScreenContent(
 
                 is VehicleState -> {
                     val vehicle = uiState
-                    Text(vehicle.name)
                     Text(vehicle.model)
                     Text(vehicle.vehicleClass)
                     Text(vehicle.manufacturer)
