@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.joppien.swapishowcase.R
-import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,7 +84,7 @@ fun VehicleScreenContent(
 @Preview(showBackground = true)
 @Composable
 fun VehicleDetailsScreenPreview() {
-    MainTheme {
+    SWAPIAppTheme {
         VehicleScreenContent(
             uiState = VehicleState(
                 name = "Name",
@@ -104,7 +104,7 @@ fun VehicleDetailsScreenPreview() {
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun VehicleDetailsScreenDarkPreview() {
-    MainTheme {
+    SWAPIAppTheme {
         VehicleScreenContent(
             uiState = VehicleState(
                 name = "Name",

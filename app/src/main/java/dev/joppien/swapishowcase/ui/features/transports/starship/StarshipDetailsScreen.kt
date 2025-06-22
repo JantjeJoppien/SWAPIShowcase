@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.joppien.swapishowcase.R
-import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -85,7 +85,7 @@ fun StarshipScreenContent(
 @Preview(showBackground = true)
 @Composable
 fun StarshipDetailsScreenPreview() {
-    MainTheme {
+    SWAPIAppTheme {
         StarshipScreenContent(
             uiState = StarshipState(
                 name = "Name",
@@ -107,7 +107,7 @@ fun StarshipDetailsScreenPreview() {
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun StarshipDetailsScreenDarkPreview() {
-    MainTheme {
+    SWAPIAppTheme {
         StarshipScreenContent(
             uiState = StarshipState(
                 name = "Name",

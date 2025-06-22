@@ -20,7 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import dev.joppien.swapishowcase.R
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
-import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
 import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +58,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenPreview() {
     val previewNavController = rememberPreviewNavController()
-    MainTheme {
+    SWAPIAppTheme {
         HomeScreen(
             navController = previewNavController,
         )
@@ -69,7 +69,7 @@ fun HomeScreenPreview() {
 @Composable
 fun HomeScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
-    MainTheme {
+    SWAPIAppTheme {
         HomeScreen(
             navController = previewNavController
         )

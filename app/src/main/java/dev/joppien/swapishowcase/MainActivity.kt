@@ -29,14 +29,14 @@ import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsSc
 import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsViewModel
 import dev.joppien.swapishowcase.ui.navigation.AppArgs
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
-import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainTheme {
+            SWAPIAppTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
