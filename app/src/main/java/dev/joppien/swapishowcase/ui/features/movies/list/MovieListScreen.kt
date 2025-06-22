@@ -25,7 +25,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import dev.joppien.swapishowcase.R
 import dev.joppien.swapishowcase.ui.navigation.AppScreens
-import dev.joppien.swapishowcase.ui.theme.MainTheme
+import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
 import dev.joppien.swapishowcase.ui.util.rememberPreviewNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -82,7 +82,7 @@ fun MovieListScreen(
 @Composable
 fun MovieListScreenPreview() {
     val previewNavController = rememberPreviewNavController()
-    MainTheme {
+    SWAPIAppTheme {
         MovieListScreen(navController = previewNavController)
     }
 }
@@ -91,7 +91,7 @@ fun MovieListScreenPreview() {
 @Composable
 fun MovieListScreenDarkPreview() {
     val previewNavController = rememberPreviewNavController()
-    MainTheme {
+    SWAPIAppTheme {
         MovieListScreen(navController = previewNavController)
     }
 }
