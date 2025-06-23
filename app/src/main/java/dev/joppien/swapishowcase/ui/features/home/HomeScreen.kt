@@ -31,7 +31,14 @@ fun HomeScreen(
     navController: NavController,
 ) {
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.feature_home_title)) }) }
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = stringResource(R.string.feature_home_title),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+            })
+        }
     ) { paddingValues ->
         Box(
             modifier = Modifier

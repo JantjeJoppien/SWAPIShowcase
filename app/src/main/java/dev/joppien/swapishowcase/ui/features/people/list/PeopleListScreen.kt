@@ -62,7 +62,7 @@ fun PeopleListScreen(
                 )
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             when (uiState) {
                 is PeopleListLoadingState -> {

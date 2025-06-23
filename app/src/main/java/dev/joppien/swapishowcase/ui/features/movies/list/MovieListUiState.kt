@@ -1,5 +1,7 @@
 package dev.joppien.swapishowcase.ui.features.movies.list
 
+import java.time.LocalDate
+
 abstract class MovieListUiState
 
 class MovieListLoadingState : MovieListUiState()
@@ -14,5 +16,5 @@ data class SimpleMovieUi(
     val id: Int,
     val title: String,
     val episodeId: Int,
-    val releaseDate: String,
+    val releaseDate: LocalDate?,
 )
