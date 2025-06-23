@@ -27,6 +27,14 @@ import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetails
 import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetailsViewModel
 import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsScreen
 import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsViewModel
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customFadeIn
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customFadeOut
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customScaleIn
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customScaleOut
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideInFromLeft
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideInFromRight
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideOutToLeft
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideOutToRight
 import dev.joppien.swapishowcase.ui.navigation.AppArgs
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
@@ -56,10 +64,38 @@ fun AppNavigation() {
         navController = navController,
         startDestination = AppDestinations.HOME_ROUTE
     ) {
-        composable(route = AppDestinations.HOME_ROUTE) {
+        composable(
+            route = AppDestinations.HOME_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             HomeScreen(navController = navController)
         }
-        composable(route = AppDestinations.MOVIE_LIST_ROUTE) {
+        composable(
+            route = AppDestinations.MOVIE_LIST_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             MovieListScreen(navController = navController)
         }
         composable(
@@ -68,7 +104,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.MOVIE_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val movieId = backStackEntry.arguments?.getInt(AppArgs.MOVIE_ID_ARG)
             if (movieId != null) {
@@ -78,7 +118,21 @@ fun AppNavigation() {
                 )
             }
         }
-        composable(route = AppDestinations.PEOPLE_LIST_ROUTE) {
+        composable(
+            route = AppDestinations.PEOPLE_LIST_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             PeopleListScreen(navController = navController)
         }
         composable(
@@ -87,7 +141,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.PERSON_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val personId = backStackEntry.arguments?.getInt(AppArgs.PERSON_ID_ARG)
             if (personId != null) {
@@ -97,7 +155,21 @@ fun AppNavigation() {
                 )
             }
         }
-        composable(route = AppDestinations.TRANSPORT_LIST_ROUTE) {
+        composable(
+            route = AppDestinations.TRANSPORT_LIST_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             TransportListScreen(navController = navController)
         }
         composable(
@@ -106,7 +178,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.TRANSPORT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val vehicleId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
             if (vehicleId != null) {
@@ -120,7 +196,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.TRANSPORT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val starshipId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
             if (starshipId != null) {
