@@ -31,6 +31,10 @@ import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customFadeIn
 import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customFadeOut
 import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customScaleIn
 import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customScaleOut
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideInFromLeft
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideInFromRight
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideOutToLeft
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.slideOutToRight
 import dev.joppien.swapishowcase.ui.navigation.AppArgs
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
@@ -60,7 +64,21 @@ fun AppNavigation() {
         navController = navController,
         startDestination = AppDestinations.HOME_ROUTE
     ) {
-        composable(route = AppDestinations.HOME_ROUTE) {
+        composable(
+            route = AppDestinations.HOME_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             HomeScreen(navController = navController)
         }
         composable(
@@ -86,7 +104,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.MOVIE_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val movieId = backStackEntry.arguments?.getInt(AppArgs.MOVIE_ID_ARG)
             if (movieId != null) {
@@ -119,7 +141,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.PERSON_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val personId = backStackEntry.arguments?.getInt(AppArgs.PERSON_ID_ARG)
             if (personId != null) {
@@ -152,7 +178,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.TRANSPORT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val vehicleId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
             if (vehicleId != null) {
@@ -166,7 +196,11 @@ fun AppNavigation() {
                 navArgument(AppArgs.TRANSPORT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = { slideInFromRight() + customFadeIn() },
+            exitTransition = { slideOutToLeft() + customFadeOut() },
+            popEnterTransition = { slideInFromLeft() + customFadeIn() },
+            popExitTransition = { slideOutToRight() + customFadeOut() },
         ) { backStackEntry ->
             val starshipId = backStackEntry.arguments?.getInt(AppArgs.TRANSPORT_ID_ARG)
             if (starshipId != null) {
