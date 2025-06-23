@@ -10,9 +10,17 @@ import androidx.compose.ui.unit.dp
 data class AppSpacing(
     val paddingButtonTopBottom: Dp = 8.dp,
     val paddingButtonSides: Dp = 16.dp,
+    val paddingLabelTopBottom: Dp = 8.dp,
+    val paddingLabelSides: Dp = 16.dp,
+    val paddingScreenTopBottom: Dp = 16.dp,
+    val paddingScreenSides: Dp = 24.dp,
 
     val spacingButtonsColumn: Dp = 24.dp,
     val spacingButtonsRow: Dp = 12.dp,
+    val spacingEntryColumn: Dp = 16.dp,
+    val spacingEntryList: Dp = 8.dp,
+
+    val labelCornerRadius: Dp = 18.dp,
 )
 
 val LocalSpacing = staticCompositionLocalOf { AppSpacing() }
