@@ -52,7 +52,7 @@ fun MovieScreenContent(
                         uiState.title
                     else
                         stringResource(R.string.feature_movies_title),
-                    style = MaterialTheme.typography.headlineLarge
+                    style = MaterialTheme.typography.headlineLarge,
                 )
             })
         }
@@ -61,7 +61,6 @@ fun MovieScreenContent(
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(paddingValues)
                 .padding(
                     start = MaterialTheme.spacing.paddingScreenSides,
@@ -69,6 +68,7 @@ fun MovieScreenContent(
                     top = MaterialTheme.spacing.paddingScreenTopBottom,
                     bottom = MaterialTheme.spacing.paddingScreenTopBottom,
                 )
+                .fillMaxSize()
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
