@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -17,14 +18,21 @@ import dev.joppien.swapishowcase.ui.theme.spacing
 @Composable
 fun IconRow(iconId: Int, text: String) =
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                start = MaterialTheme.spacing.paddingIconSides,
+                end = MaterialTheme.spacing.paddingIconSides,
+                top = MaterialTheme.spacing.paddingIconTopBottom,
+                bottom = MaterialTheme.spacing.paddingIconTopBottom,
+            ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
             painter = painterResource(id = iconId),
             contentDescription = null,
-            tint = MaterialTheme.colorScheme.primary,
+            tint = MaterialTheme.colorScheme.onSurface,
         )
         Text(
             text = text,

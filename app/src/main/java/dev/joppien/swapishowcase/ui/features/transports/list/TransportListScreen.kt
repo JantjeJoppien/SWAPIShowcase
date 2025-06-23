@@ -120,8 +120,7 @@ fun TransportListScreen(
                                         style = MaterialTheme.typography.bodySmall,
                                     )
                                     IconRow(
-                                        // ToDo: Replace placeholder icon
-                                        iconId = R.drawable.ic_launcher_foreground,
+                                        iconId = R.drawable.ic_credit,
                                         text = vehicle.costInCredits,
                                     )
                                 }

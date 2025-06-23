@@ -16,6 +16,8 @@ data class AppSpacing(
     val paddingScreenSides: Dp = 24.dp,
     val paddingCardTopBottom: Dp = 12.dp,
     val paddingCardSides: Dp = 8.dp,
+    val paddingIconTopBottom: Dp = 8.dp,
+    val paddingIconSides: Dp = 4.dp,
 
     val spacingButtonsColumn: Dp = 24.dp,
     val spacingButtonsRow: Dp = 12.dp,
