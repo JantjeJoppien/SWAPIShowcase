@@ -27,6 +27,10 @@ import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetails
 import dev.joppien.swapishowcase.ui.features.transports.starship.StarshipDetailsViewModel
 import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsScreen
 import dev.joppien.swapishowcase.ui.features.transports.vehicle.VehicleDetailsViewModel
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customFadeIn
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customFadeOut
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customScaleIn
+import dev.joppien.swapishowcase.ui.navigation.AppAnimations.customScaleOut
 import dev.joppien.swapishowcase.ui.navigation.AppArgs
 import dev.joppien.swapishowcase.ui.navigation.AppDestinations
 import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
@@ -59,7 +63,21 @@ fun AppNavigation() {
         composable(route = AppDestinations.HOME_ROUTE) {
             HomeScreen(navController = navController)
         }
-        composable(route = AppDestinations.MOVIE_LIST_ROUTE) {
+        composable(
+            route = AppDestinations.MOVIE_LIST_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             MovieListScreen(navController = navController)
         }
         composable(
@@ -78,7 +96,21 @@ fun AppNavigation() {
                 )
             }
         }
-        composable(route = AppDestinations.PEOPLE_LIST_ROUTE) {
+        composable(
+            route = AppDestinations.PEOPLE_LIST_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             PeopleListScreen(navController = navController)
         }
         composable(
@@ -97,7 +129,21 @@ fun AppNavigation() {
                 )
             }
         }
-        composable(route = AppDestinations.TRANSPORT_LIST_ROUTE) {
+        composable(
+            route = AppDestinations.TRANSPORT_LIST_ROUTE,
+            enterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            popEnterTransition = {
+                customScaleIn() + customFadeIn()
+            },
+            exitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+            popExitTransition = {
+                customScaleOut() + customFadeOut()
+            },
+        ) {
             TransportListScreen(navController = navController)
         }
         composable(
