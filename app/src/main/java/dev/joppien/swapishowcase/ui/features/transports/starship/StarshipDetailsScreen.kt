@@ -83,10 +83,7 @@ fun StarshipScreenContent(
                     Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
                         EntryRow(labelString = "Model", entryString = starship.model)
                         EntryRow(labelString = "Manufacturer", entryString = starship.manufacturer)
-                        EntryRow(
-                            labelString = "Starship Class",
-                            entryString = starship.starshipClass,
-                        )
+                        EntryRow(labelString = "Class", entryString = starship.starshipClass)
                         EntryRow(
                             labelString = "Cost in Credits",
                             entryString = starship.costInCredits,
