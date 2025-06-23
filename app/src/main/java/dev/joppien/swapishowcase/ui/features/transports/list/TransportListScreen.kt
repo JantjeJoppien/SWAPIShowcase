@@ -43,7 +43,14 @@ fun TransportListScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.feature_transport_title)) }) }
+        topBar = {
+            TopAppBar(title = {
+                Text(
+                    text = stringResource(R.string.feature_transport_title),
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+            })
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
