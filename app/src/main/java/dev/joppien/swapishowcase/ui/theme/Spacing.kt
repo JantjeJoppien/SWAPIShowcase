@@ -29,6 +29,7 @@ data class AppSpacing(
     val labelCornerRadius: Dp = 18.dp,
 
     val gridMinSize: Dp = 160.dp,
+    val openingCrawlSize: Dp = 260.dp,
 )
 
 val LocalSpacing = staticCompositionLocalOf { AppSpacing() }

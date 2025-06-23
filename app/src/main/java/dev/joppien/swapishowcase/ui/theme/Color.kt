@@ -56,3 +56,5 @@ val LightSide_Surface = Color(0xFFFFFBFF)
 val LightSide_OnSurface = Color(0xFF1F1B16)
 val LightSide_SurfaceVariant = Color(0xFFE7E0EC)
 val LightSide_OnSurfaceVariant = Color(0xFF49444F)
+
+val StarWarsColor = Color(0xFFFFE81F)
