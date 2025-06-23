@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,9 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import dev.joppien.swapishowcase.R
+import dev.joppien.swapishowcase.ui.components.EntryRow
 import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
+import dev.joppien.swapishowcase.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,21 +41,30 @@ fun StarshipScreenContent(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
+            LargeTopAppBar(title = {
                 Text(
                     text = if (uiState is StarshipState)
                         uiState.name
                     else
-                        stringResource(R.string.feature_transport_title)
+                        stringResource(R.string.feature_transport_title),
+                    style = MaterialTheme.typography.headlineLarge,
                 )
             })
         }
     ) { paddingValues ->
+        val scrollState = rememberScrollState()
+
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(paddingValues)
-                .padding(16.dp),
+                .padding(
+                    start = MaterialTheme.spacing.paddingScreenSides,
+                    end = MaterialTheme.spacing.paddingScreenSides,
+                    top = MaterialTheme.spacing.paddingScreenTopBottom,
+                    bottom = MaterialTheme.spacing.paddingScreenTopBottom,
+                )
+                .fillMaxSize()
+                .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -66,16 +79,55 @@ fun StarshipScreenContent(
 
                 is StarshipState -> {
                     val starship = uiState
-                    Text(starship.model)
-                    Text(starship.starshipClass)
-                    Text(starship.manufacturer)
-                    Text(starship.costInCredits)
-                    Text(starship.length)
-                    Text(starship.maxAtmospheringSpeed)
-                    Text(starship.hyperdriveRating)
-                    Text(starship.mglt)
-                    Text(starship.cargoCapacity)
-                    Text(starship.consumables)
+
+                    Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_model_label),
+                            entryString = starship.model,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_manufacturer_label),
+                            entryString = starship.manufacturer,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_class_label),
+                            entryString = starship.starshipClass,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_costInCredits_label),
+                            entryString = starship.costInCredits,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_length_label),
+                            entryString = starship.length,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_maxAtmospheringSpeed_label),
+                            entryString = starship.maxAtmospheringSpeed,
+                        )
+                        EntryRow(
+                            labelString = stringResource(
+                                R.string.feature_transport_mglt_label,
+                                stringResource(R.string.feature_transport_starship_label),
+                            ),
+                            entryString = starship.mglt,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_hyperdriveRating_label),
+                            entryString = starship.hyperdriveRating,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_cargoCapacity_label),
+                            entryString = starship.cargoCapacity,
+                        )
+                        EntryRow(
+                            labelString = stringResource(
+                                R.string.feature_transport_consumables_label,
+                                stringResource(R.string.feature_transport_starship_label),
+                            ),
+                            entryString = starship.consumables,
+                        )
+                    }
                 }
             }
         }

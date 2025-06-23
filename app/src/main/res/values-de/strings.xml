@@ -1,8 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app.name" translatable="false">SWAPI Showcase</string>
+
+    <string name="general.button.refresh">Aktualisieren</string>
+
     <string name="feature.movies.title">Holocron</string>
-    <string name="feature.people.tile">Personenregister</string>
+    <string name="feature.movies.episodeNumber.label">Episodennummer</string>
+    <string name="feature.movies.releaseDate.label">Veröffentlichungsdatum</string>
+    <string name="feature.movies.director.label">Regie</string>
+    <string name="feature.movies.producers.label">Produzenten</string>
+
+    <string name="feature.people.title">Personenregister</string>
+    <string name="feature.people.gender.label">Geschlecht</string>
+    <string name="feature.people.birthYear.label">Geburtsjahr</string>
+    <string name="feature.people.height.label">Größe</string>
+    <string name="feature.people.mass.label">Gewicht</string>
+    <string name="feature.people.color.skin.label">Hautfarbe</string>
+    <string name="feature.people.color.hair.label">Haarfarbe</string>
+    <string name="feature.people.color.eye.label">Augenfarbe</string>
+
     <string name="feature.transport.title">Hangar</string>
+    <string name="feature.transport.starship.label">raumschiff</string>
+    <string name="feature.transport.vehicle.label">fahrzeug</string>
+    <string name="feature.transport.model.label">Modell</string>
+    <string name="feature.transport.manufacturer.label">Hersteller</string>
+    <string name="feature.transport.class.label">Klasse</string>
+    <string name="feature.transport.costInCredits.label">Kosten in Credits</string>
+    <string name="feature.transport.length.label">Länge</string>
+    <string name="feature.transport.maxAtmospheringSpeed.label">Max. Atmosphären-Geschwindigkeit</string>
+    <string name="feature.transport.mglt.label">Maximale Anzahl an Megalight, die dieses %s in einer Standardstunde zurücklegen kann</string>
+    <string name="feature.transport.hyperdriveRating.label">Hyperantriebsklasse</string>
+    <string name="feature.transport.cargoCapacity.label">Frachtkapazität</string>
+    <string name="feature.transport.consumables.label">Maximale Dauer, für die die Verbrauchsgüter für die gesamte Besatzung dieses %s ausreichen</string>
+
     <string name="feature.home.title">Basis</string>
-    <string name="general.button.refresh">Neu laden</string>
 </resources>

@@ -7,9 +7,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -19,7 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import dev.joppien.swapishowcase.R
+import dev.joppien.swapishowcase.ui.components.EntryRow
 import dev.joppien.swapishowcase.ui.theme.SWAPIAppTheme
+import dev.joppien.swapishowcase.ui.theme.spacing
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,12 +40,13 @@ fun VehicleScreenContent(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(title = {
+            LargeTopAppBar(title = {
                 Text(
                     text = if (uiState is VehicleState)
                         uiState.name
                     else
-                        stringResource(R.string.feature_transport_title)
+                        stringResource(R.string.feature_transport_title),
+                    style = MaterialTheme.typography.headlineLarge,
                 )
             })
         }
@@ -66,14 +70,44 @@ fun VehicleScreenContent(
 
                 is VehicleState -> {
                     val vehicle = uiState
-                    Text(vehicle.model)
-                    Text(vehicle.vehicleClass)
-                    Text(vehicle.manufacturer)
-                    Text(vehicle.costInCredits)
-                    Text(vehicle.length)
-                    Text(vehicle.maxAtmospheringSpeed)
-                    Text(vehicle.cargoCapacity)
-                    Text(vehicle.consumables)
+
+                    Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_model_label),
+                            entryString = vehicle.model,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_manufacturer_label),
+                            entryString = vehicle.manufacturer,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_class_label),
+                            entryString = vehicle.vehicleClass,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_costInCredits_label),
+                            entryString = vehicle.costInCredits,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_length_label),
+                            entryString = vehicle.length,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_maxAtmospheringSpeed_label),
+                            entryString = vehicle.maxAtmospheringSpeed,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_cargoCapacity_label),
+                            entryString = vehicle.cargoCapacity,
+                        )
+                        EntryRow(
+                            labelString = stringResource(
+                                R.string.feature_transport_consumables_label,
+                                stringResource(R.string.feature_transport_vehicle_label),
+                            ),
+                            entryString = vehicle.consumables,
+                        )
+                    }
                 }
             }
         }

@@ -31,7 +31,7 @@ class MovieDetailsViewModel @Inject constructor(
                         id = movie.id,
                         title = movie.title,
                         episodeId = movie.episodeId,
-                        releaseDate = movie.releaseDate.toString(),
+                        releaseDate = movie.releaseDate,
                         director = movie.director,
                         producers = movie.producers,
                         openingCrawl = movie.openingCrawl
