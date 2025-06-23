@@ -49,7 +49,7 @@ fun HomeScreen(
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingButtonsRow)) {
                     NavigationButton(
-                        textId = R.string.feature_people_tile,
+                        textId = R.string.feature_people_title,
                         onClick = { navController.navigate(AppDestinations.PEOPLE_LIST_ROUTE) }
                     )
                     NavigationButton(

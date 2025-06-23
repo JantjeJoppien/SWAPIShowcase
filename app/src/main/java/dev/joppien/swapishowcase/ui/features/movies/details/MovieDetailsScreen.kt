@@ -71,7 +71,7 @@ fun MovieScreenContent(
                 .fillMaxSize()
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             when (uiState) {
                 is MovieDetailsLoadingState -> {
@@ -90,21 +90,27 @@ fun MovieScreenContent(
 
                     Text(
                         modifier = Modifier.padding(bottom = MaterialTheme.spacing.spacingEntryColumn),
-                        text = movie.openingCrawl
+                        text = movie.openingCrawl,
                     )
                     Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
                         EntryRow(
-                            labelString = "Episode Number",
-                            entryString = movie.episodeId.toString()
+                            labelString = stringResource(R.string.feature_movies_episodeNumber_label),
+                            entryString = movie.episodeId.toString(),
                         )
                         movie.releaseDate?.let { date ->
                             EntryRow(
-                                labelString = "Release Date",
-                                entryString = date.format(dateFormatter)
+                                labelString = stringResource(R.string.feature_movies_releaseDate_label),
+                                entryString = date.format(dateFormatter),
                             )
                         }
-                        EntryRow(labelString = "Director", entryString = movie.director)
-                        EntryListRow(labelString = "Producers", entryList = movie.producers)
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_movies_director_label),
+                            entryString = movie.director,
+                        )
+                        EntryListRow(
+                            labelString = stringResource(R.string.feature_movies_producers_label),
+                            entryList = movie.producers,
+                        )
                     }
                 }
 

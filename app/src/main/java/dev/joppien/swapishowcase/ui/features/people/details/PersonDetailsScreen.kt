@@ -46,7 +46,7 @@ fun PersonScreenContent(
                     text = if (uiState is PersonDetailsState)
                         uiState.name
                     else
-                        stringResource(R.string.feature_people_tile),
+                        stringResource(R.string.feature_people_title),
                     style = MaterialTheme.typography.headlineLarge,
                 )
             })
@@ -81,13 +81,34 @@ fun PersonScreenContent(
                     val person = uiState
 
                     Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
-                        EntryRow(labelString = "Gender", entryString = person.gender)
-                        EntryRow(labelString = "Birth Year", entryString = person.birthYear)
-                        EntryRow(labelString = "Height", entryString = person.height)
-                        EntryRow(labelString = "Mass", entryString = person.mass)
-                        EntryRow(labelString = "Skin Color", entryString = person.skinColor)
-                        EntryRow(labelString = "Hair Color", entryString = person.hairColor)
-                        EntryRow(labelString = "Eye Color", entryString = person.eyeColor)
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_gender_label),
+                            entryString = person.gender,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_birthYear_label),
+                            entryString = person.birthYear,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_height_label),
+                            entryString = person.height,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_mass_label),
+                            entryString = person.mass,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_color_skin_label),
+                            entryString = person.skinColor,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_color_hair_label),
+                            entryString = person.hairColor,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_people_color_eye_label),
+                            entryString = person.eyeColor,
+                        )
                     }
                 }
             }

@@ -72,24 +72,39 @@ fun VehicleScreenContent(
                     val vehicle = uiState
 
                     Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
-                        EntryRow(labelString = "Model", entryString = vehicle.model)
-                        EntryRow(labelString = "Manufacturer", entryString = vehicle.manufacturer)
-                        EntryRow(labelString = "Class", entryString = vehicle.vehicleClass)
                         EntryRow(
-                            labelString = "Cost in Credits",
+                            labelString = stringResource(R.string.feature_transport_model_label),
+                            entryString = vehicle.model,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_manufacturer_label),
+                            entryString = vehicle.manufacturer,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_class_label),
+                            entryString = vehicle.vehicleClass,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_costInCredits_label),
                             entryString = vehicle.costInCredits,
                         )
-                        EntryRow(labelString = "Length", entryString = vehicle.length)
                         EntryRow(
-                            labelString = "Max Atmosphering Speed",
+                            labelString = stringResource(R.string.feature_transport_length_label),
+                            entryString = vehicle.length,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_maxAtmospheringSpeed_label),
                             entryString = vehicle.maxAtmospheringSpeed,
                         )
                         EntryRow(
-                            labelString = "Cargo Capacity",
+                            labelString = stringResource(R.string.feature_transport_cargoCapacity_label),
                             entryString = vehicle.cargoCapacity,
                         )
                         EntryRow(
-                            labelString = "Maximum time this starship can provide consumables for its entire crew without having to resupply",
+                            labelString = stringResource(
+                                R.string.feature_transport_consumables_label,
+                                stringResource(R.string.feature_transport_vehicle_label),
+                            ),
                             entryString = vehicle.consumables,
                         )
                     }

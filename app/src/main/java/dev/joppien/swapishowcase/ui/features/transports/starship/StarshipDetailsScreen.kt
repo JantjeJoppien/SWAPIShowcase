@@ -81,32 +81,50 @@ fun StarshipScreenContent(
                     val starship = uiState
 
                     Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
-                        EntryRow(labelString = "Model", entryString = starship.model)
-                        EntryRow(labelString = "Manufacturer", entryString = starship.manufacturer)
-                        EntryRow(labelString = "Class", entryString = starship.starshipClass)
                         EntryRow(
-                            labelString = "Cost in Credits",
+                            labelString = stringResource(R.string.feature_transport_model_label),
+                            entryString = starship.model,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_manufacturer_label),
+                            entryString = starship.manufacturer,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_class_label),
+                            entryString = starship.starshipClass,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_costInCredits_label),
                             entryString = starship.costInCredits,
                         )
-                        EntryRow(labelString = "Length", entryString = starship.length)
                         EntryRow(
-                            labelString = "Max Atmosphering Speed",
+                            labelString = stringResource(R.string.feature_transport_length_label),
+                            entryString = starship.length,
+                        )
+                        EntryRow(
+                            labelString = stringResource(R.string.feature_transport_maxAtmospheringSpeed_label),
                             entryString = starship.maxAtmospheringSpeed,
                         )
                         EntryRow(
-                            labelString = "Maximum number of Megalights this starship can travel in a standard hour",
+                            labelString = stringResource(
+                                R.string.feature_transport_mglt_label,
+                                stringResource(R.string.feature_transport_starship_label),
+                            ),
                             entryString = starship.mglt,
                         )
                         EntryRow(
-                            labelString = "Hyperdrive Rating",
+                            labelString = stringResource(R.string.feature_transport_hyperdriveRating_label),
                             entryString = starship.hyperdriveRating,
                         )
                         EntryRow(
-                            labelString = "Cargo Capacity",
+                            labelString = stringResource(R.string.feature_transport_cargoCapacity_label),
                             entryString = starship.cargoCapacity,
                         )
                         EntryRow(
-                            labelString = "Maximum time this starship can provide consumables for its entire crew without having to resupply",
+                            labelString = stringResource(
+                                R.string.feature_transport_consumables_label,
+                                stringResource(R.string.feature_transport_starship_label),
+                            ),
                             entryString = starship.consumables,
                         )
                     }

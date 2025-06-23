@@ -1,8 +1,36 @@
 <resources>
     <string name="app.name" translatable="false">SWAPI Showcase</string>
-    <string name="feature.movies.title">Holocron</string>
-    <string name="feature.people.tile">Personnel Files</string>
-    <string name="feature.transport.title">Hangar</string>
-    <string name="feature.home.title">Base</string>
+
     <string name="general.button.refresh">Refresh</string>
+
+    <string name="feature.movies.title">Holocron</string>
+    <string name="feature.movies.episodeNumber.label">Episode Number</string>
+    <string name="feature.movies.releaseDate.label">Release Date</string>
+    <string name="feature.movies.director.label">Director</string>
+    <string name="feature.movies.producers.label">Producers</string>
+
+    <string name="feature.people.title">Registry</string>
+    <string name="feature.people.gender.label">Gender</string>
+    <string name="feature.people.birthYear.label">Birth Year</string>
+    <string name="feature.people.height.label">Height</string>
+    <string name="feature.people.mass.label">Mass</string>
+    <string name="feature.people.color.skin.label">Skin Color</string>
+    <string name="feature.people.color.hair.label">Hair Color</string>
+    <string name="feature.people.color.eye.label">Eye Color</string>
+
+    <string name="feature.transport.title">Hangar</string>
+    <string name="feature.transport.starship.label">starship</string>
+    <string name="feature.transport.vehicle.label">vehicle</string>
+    <string name="feature.transport.model.label">Model</string>
+    <string name="feature.transport.manufacturer.label">Manufacturer</string>
+    <string name="feature.transport.class.label">Class</string>
+    <string name="feature.transport.costInCredits.label">Cost in Credits</string>
+    <string name="feature.transport.length.label">Length</string>
+    <string name="feature.transport.maxAtmospheringSpeed.label">Max Atmospheric Speed</string>
+    <string name="feature.transport.mglt.label">The Maximum number of Megalights this %s can travel in a standard hour. </string>
+    <string name="feature.transport.hyperdriveRating.label">Hyperdrive Rating</string>
+    <string name="feature.transport.cargoCapacity.label">Cargo Capacity</string>
+    <string name="feature.transport.consumables.label">The maximum length of time this %s can provide consumables for its entire crew without having to resupply</string>
+
+    <string name="feature.home.title">Base</string>
 </resources>

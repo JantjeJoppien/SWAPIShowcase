@@ -37,7 +37,7 @@ fun PeopleListScreen(
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.feature_people_tile)) }) }
+        topBar = { TopAppBar(title = { Text(text = stringResource(R.string.feature_people_title)) }) }
     ) { paddingValues ->
         Column(
             modifier = Modifier
