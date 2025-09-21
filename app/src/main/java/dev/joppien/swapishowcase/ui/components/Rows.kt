@@ -21,10 +21,10 @@ fun IconRow(iconId: Int, text: String) =
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                start = MaterialTheme.spacing.paddingIconSides,
-                end = MaterialTheme.spacing.paddingIconSides,
-                top = MaterialTheme.spacing.paddingIconTopBottom,
-                bottom = MaterialTheme.spacing.paddingIconTopBottom,
+                start = spacing.paddingIconSides,
+                end = spacing.paddingIconSides,
+                top = spacing.paddingIconTopBottom,
+                bottom = spacing.paddingIconTopBottom,
             ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
@@ -69,7 +69,7 @@ fun EntryListRow(labelString: String, entryList: List<String>) =
         )
         Column(
             modifier = Modifier.weight(0.5f),
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryList),
+            verticalArrangement = Arrangement.spacedBy(spacing.spacingEntryList),
         ) {
             entryList.forEach { entry ->
                 HighlightedText(modifier = Modifier.fillMaxWidth(), text = entry)

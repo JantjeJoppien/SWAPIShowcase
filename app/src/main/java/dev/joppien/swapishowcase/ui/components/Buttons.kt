@@ -16,10 +16,10 @@ fun NavigationButton(textId: Int, onClick: () -> Unit) =
     ) {
         Text(
             modifier = Modifier.padding(
-                top = MaterialTheme.spacing.paddingButtonTopBottom,
-                bottom = MaterialTheme.spacing.paddingButtonTopBottom,
-                start = MaterialTheme.spacing.paddingButtonSides,
-                end = MaterialTheme.spacing.paddingButtonSides,
+                top = spacing.paddingButtonTopBottom,
+                bottom = spacing.paddingButtonTopBottom,
+                start = spacing.paddingButtonSides,
+                end = spacing.paddingButtonSides,
             ),
             text = stringResource(textId),
             style = MaterialTheme.typography.labelLarge

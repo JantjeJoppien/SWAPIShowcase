@@ -71,7 +71,7 @@ fun VehicleScreenContent(
                 is VehicleState -> {
                     val vehicle = uiState
 
-                    Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(spacing.spacingEntryColumn)) {
                         EntryRow(
                             labelString = stringResource(R.string.feature_transport_model_label),
                             entryString = vehicle.model,

@@ -73,10 +73,10 @@ fun MovieScreenContent(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(
-                    start = MaterialTheme.spacing.paddingScreenSides,
-                    end = MaterialTheme.spacing.paddingScreenSides,
-                    top = MaterialTheme.spacing.paddingScreenTopBottom,
-                    bottom = MaterialTheme.spacing.paddingScreenTopBottom,
+                    start = spacing.paddingScreenSides,
+                    end = spacing.paddingScreenSides,
+                    top = spacing.paddingScreenTopBottom,
+                    bottom = spacing.paddingScreenTopBottom,
                 )
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -104,7 +104,7 @@ fun MovieScreenContent(
                     )
                     Column(
                         modifier = Modifier.verticalScroll(scrollState),
-                        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn),
+                        verticalArrangement = Arrangement.spacedBy(spacing.spacingEntryColumn),
                     ) {
                         EntryRow(
                             labelString = stringResource(R.string.feature_movies_episodeNumber_label),
@@ -149,8 +149,8 @@ private fun InteractiveStarWarsCrawl(text: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(MaterialTheme.spacing.openingCrawlSize)
-            .padding(bottom = MaterialTheme.spacing.spacingEntryColumn)
+            .height(spacing.openingCrawlSize)
+            .padding(bottom = spacing.spacingEntryColumn)
             .clipToBounds()
             .graphicsLayer {
                 // Rotation of text
@@ -165,7 +165,7 @@ private fun InteractiveStarWarsCrawl(text: String) {
                 .verticalScroll(scrollState),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Spacer(modifier = Modifier.height(MaterialTheme.spacing.openingCrawlSize))
+            Spacer(modifier = Modifier.height(spacing.openingCrawlSize))
             Text(
                 text = text,
                 style = MaterialTheme.typography.titleMedium.copy(

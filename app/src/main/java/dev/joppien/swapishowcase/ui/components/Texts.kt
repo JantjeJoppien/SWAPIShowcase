@@ -15,13 +15,13 @@ fun HighlightedText(modifier: Modifier = Modifier, text: String) = Text(
     modifier = modifier
         .background(
             color = MaterialTheme.colorScheme.secondaryContainer,
-            shape = RoundedCornerShape(size = MaterialTheme.spacing.labelCornerRadius)
+            shape = RoundedCornerShape(size = spacing.labelCornerRadius)
         )
         .padding(
-            start = MaterialTheme.spacing.paddingLabelSides,
-            end = MaterialTheme.spacing.paddingLabelSides,
-            top = MaterialTheme.spacing.paddingLabelTopBottom,
-            bottom = MaterialTheme.spacing.paddingLabelTopBottom,
+            start = spacing.paddingLabelSides,
+            end = spacing.paddingLabelSides,
+            top = spacing.paddingLabelTopBottom,
+            bottom = spacing.paddingLabelTopBottom,
         ),
     text = text,
     style = MaterialTheme.typography.bodyMedium,

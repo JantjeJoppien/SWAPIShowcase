@@ -1,6 +1,5 @@
 package dev.joppien.swapishowcase.ui.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -34,7 +33,7 @@ data class AppSpacing(
 
 val LocalSpacing = staticCompositionLocalOf { AppSpacing() }
 
-val MaterialTheme.spacing: AppSpacing
+val spacing: AppSpacing
     @Composable
     @ReadOnlyComposable
     get() = LocalSpacing.current

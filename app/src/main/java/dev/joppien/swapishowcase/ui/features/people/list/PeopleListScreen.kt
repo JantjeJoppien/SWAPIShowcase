@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import dev.joppien.swapishowcase.R
 import dev.joppien.swapishowcase.ui.navigation.AppScreens
@@ -55,10 +55,10 @@ fun PeopleListScreen(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(
-                    start = MaterialTheme.spacing.paddingScreenSides,
-                    end = MaterialTheme.spacing.paddingScreenSides,
-                    top = MaterialTheme.spacing.paddingScreenTopBottom,
-                    bottom = MaterialTheme.spacing.paddingScreenTopBottom,
+                    start = spacing.paddingScreenSides,
+                    end = spacing.paddingScreenSides,
+                    top = spacing.paddingScreenTopBottom,
+                    bottom = spacing.paddingScreenTopBottom,
                 )
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -80,9 +80,9 @@ fun PeopleListScreen(
                     val people = (uiState as PeopleListState).people
 
                     LazyVerticalGrid(
-                        columns = GridCells.Adaptive(minSize = MaterialTheme.spacing.gridMinSize),
-                        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingCardGrid),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingCardGrid),
+                        columns = GridCells.Adaptive(minSize = spacing.gridMinSize),
+                        verticalArrangement = Arrangement.spacedBy(spacing.spacingCardGrid),
+                        horizontalArrangement = Arrangement.spacedBy(spacing.spacingCardGrid),
                     ) {
                         items(
                             count = people.size,
@@ -96,12 +96,12 @@ fun PeopleListScreen(
                                 }) {
                                 Column(
                                     modifier = Modifier.padding(
-                                        start = MaterialTheme.spacing.paddingCardSides,
-                                        end = MaterialTheme.spacing.paddingCardSides,
-                                        top = MaterialTheme.spacing.paddingCardTopBottom,
-                                        bottom = MaterialTheme.spacing.paddingCardTopBottom,
+                                        start = spacing.paddingCardSides,
+                                        end = spacing.paddingCardSides,
+                                        top = spacing.paddingCardTopBottom,
+                                        bottom = spacing.paddingCardTopBottom,
                                     ),
-                                    verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingCard),
+                                    verticalArrangement = Arrangement.spacedBy(spacing.spacingCard),
                                 ) {
                                     Text(
                                         modifier = Modifier.fillMaxWidth(),

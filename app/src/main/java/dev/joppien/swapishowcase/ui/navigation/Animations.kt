@@ -1,6 +1,5 @@
 package dev.joppien.swapishowcase.ui.navigation
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.EnterTransition
 import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
@@ -10,31 +9,30 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.navigation.NavBackStackEntry
 
 object AppAnimations {
 
-    fun AnimatedContentTransitionScope<NavBackStackEntry>.customScaleIn(): EnterTransition {
+    fun customScaleIn(): EnterTransition {
         return scaleIn(initialScale = 0.8f, animationSpec = tween(1500))
     }
 
-    fun AnimatedContentTransitionScope<NavBackStackEntry>.customScaleOut(): ExitTransition {
+    fun customScaleOut(): ExitTransition {
         return scaleOut(targetScale = 1.2f, animationSpec = tween(1500))
     }
 
-    fun AnimatedContentTransitionScope<NavBackStackEntry>.slideInFromRight(): EnterTransition {
+    fun slideInFromRight(): EnterTransition {
         return slideInHorizontally(initialOffsetX = { it }, animationSpec = tween(500))
     }
 
-    fun AnimatedContentTransitionScope<NavBackStackEntry>.slideInFromLeft(): EnterTransition {
+    fun slideInFromLeft(): EnterTransition {
         return slideInHorizontally(initialOffsetX = { -it }, animationSpec = tween(500))
     }
 
-    fun AnimatedContentTransitionScope<NavBackStackEntry>.slideOutToLeft(): ExitTransition {
+    fun slideOutToLeft(): ExitTransition {
         return slideOutHorizontally(targetOffsetX = { -it }, animationSpec = tween(500))
     }
 
-    fun AnimatedContentTransitionScope<NavBackStackEntry>.slideOutToRight(): ExitTransition {
+    fun slideOutToRight(): ExitTransition {
         return slideOutHorizontally(targetOffsetX = { it }, animationSpec = tween(500))
     }
 

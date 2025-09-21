@@ -48,13 +48,13 @@ fun HomeScreen(
         ) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingButtonsColumn),
+                verticalArrangement = Arrangement.spacedBy(spacing.spacingButtonsColumn),
             ) {
                 NavigationButton(
                     textId = R.string.feature_movies_title,
                     onClick = { navController.navigate(AppDestinations.MOVIE_LIST_ROUTE) }
                 )
-                Row(horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingButtonsRow)) {
+                Row(horizontalArrangement = Arrangement.spacedBy(spacing.spacingButtonsRow)) {
                     NavigationButton(
                         textId = R.string.feature_people_title,
                         onClick = { navController.navigate(AppDestinations.PEOPLE_LIST_ROUTE) }

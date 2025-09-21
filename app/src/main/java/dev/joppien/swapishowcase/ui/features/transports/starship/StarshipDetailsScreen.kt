@@ -58,10 +58,10 @@ fun StarshipScreenContent(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(
-                    start = MaterialTheme.spacing.paddingScreenSides,
-                    end = MaterialTheme.spacing.paddingScreenSides,
-                    top = MaterialTheme.spacing.paddingScreenTopBottom,
-                    bottom = MaterialTheme.spacing.paddingScreenTopBottom,
+                    start = spacing.paddingScreenSides,
+                    end = spacing.paddingScreenSides,
+                    top = spacing.paddingScreenTopBottom,
+                    bottom = spacing.paddingScreenTopBottom,
                 )
                 .fillMaxSize()
                 .verticalScroll(scrollState),
@@ -80,7 +80,7 @@ fun StarshipScreenContent(
                 is StarshipState -> {
                     val starship = uiState
 
-                    Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.spacingEntryColumn)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(spacing.spacingEntryColumn)) {
                         EntryRow(
                             labelString = stringResource(R.string.feature_transport_model_label),
                             entryString = starship.model,
