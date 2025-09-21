@@ -3,39 +3,39 @@ package dev.joppien.swapishowcase.data.remote.dto
 import com.squareup.moshi.Json
 
 data class MovieDTO(
-    @Json(name = "url")
+    @param:Json(name = "url")
     val url: String,
 
-    @Json(name = "title")
+    @param:Json(name = "title")
     val title: String,
 
-    @Json(name = "episode_id")
+    @param:Json(name = "episode_id")
     val episodeId: Int,
 
-    @Json(name = "opening_crawl")
+    @param:Json(name = "opening_crawl")
     val openingCrawl: String,
 
-    @Json(name = "director")
+    @param:Json(name = "director")
     val director: String,
 
-    @Json(name = "producer")
+    @param:Json(name = "producer")
     val producers: String,
 
-    @Json(name = "release_date")
+    @param:Json(name = "release_date")
     val releaseDate: String,
 
-    @Json(name = "characters")
+    @param:Json(name = "characters")
     val characters: List<String>,
 
-    @Json(name = "planets")
+    @param:Json(name = "planets")
     val planets: List<String>,
 
-    @Json(name = "starships")
+    @param:Json(name = "starships")
     val starships: List<String>,
 
-    @Json(name = "vehicles")
+    @param:Json(name = "vehicles")
     val vehicles: List<String>,
 
-    @Json(name = "species")
+    @param:Json(name = "species")
     val species: List<String>,
 )

@@ -3,45 +3,45 @@ package dev.joppien.swapishowcase.data.remote.dto
 import com.squareup.moshi.Json
 
 data class VehicleDTO(
-    @Json(name = "url")
+    @param:Json(name = "url")
     val url: String,
 
-    @Json(name = "name")
+    @param:Json(name = "name")
     val name: String,
 
-    @Json(name = "model")
+    @param:Json(name = "model")
     val model: String,
 
-    @Json(name = "vehicle_class")
+    @param:Json(name = "vehicle_class")
     val vehicleClass: String,
 
-    @Json(name = "manufacturer")
+    @param:Json(name = "manufacturer")
     val manufacturer: String,
 
-    @Json(name = "length")
+    @param:Json(name = "length")
     val length: String,
 
-    @Json(name = "cost_in_credits")
+    @param:Json(name = "cost_in_credits")
     val costInCredits: String,
 
-    @Json(name = "crew")
+    @param:Json(name = "crew")
     val crew: String,
 
-    @Json(name = "passengers")
+    @param:Json(name = "passengers")
     val passengers: String,
 
-    @Json(name = "max_atmosphering_speed")
+    @param:Json(name = "max_atmosphering_speed")
     val maxAtmospheringSpeed: String,
 
-    @Json(name = "cargo_capacity")
+    @param:Json(name = "cargo_capacity")
     val cargoCapacity: String,
 
-    @Json(name = "consumables")
+    @param:Json(name = "consumables")
     val consumables: String,
 
-    @Json(name = "films")
+    @param:Json(name = "films")
     val films: List<String>,
 
-    @Json(name = "pilots")
+    @param:Json(name = "pilots")
     val pilots: List<String>,
 )

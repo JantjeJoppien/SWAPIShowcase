@@ -3,45 +3,45 @@ package dev.joppien.swapishowcase.data.remote.dto
 import com.squareup.moshi.Json
 
 data class PersonDTO(
-    @Json(name = "url")
+    @param:Json(name = "url")
     val url: String,
 
-    @Json(name = "name")
+    @param:Json(name = "name")
     val name: String,
 
-    @Json(name = "birth_year")
+    @param:Json(name = "birth_year")
     val birthYear: String,
 
-    @Json(name = "eye_color")
+    @param:Json(name = "eye_color")
     val eyeColor: String,
 
-    @Json(name = "gender")
+    @param:Json(name = "gender")
     val gender: String,
 
-    @Json(name = "hair_color")
+    @param:Json(name = "hair_color")
     val hairColor: String,
 
-    @Json(name = "height")
+    @param:Json(name = "height")
     val height: String,
 
-    @Json(name = "mass")
+    @param:Json(name = "mass")
     val mass: String,
 
-    @Json(name = "skin_color")
+    @param:Json(name = "skin_color")
     val skinColor: String,
 
-    @Json(name = "homeworld")
+    @param:Json(name = "homeworld")
     val homeworld: String,
 
-    @Json(name = "films")
+    @param:Json(name = "films")
     val films: List<String>,
 
-    @Json(name = "species")
+    @param:Json(name = "species")
     val species: List<String>,
 
-    @Json(name = "starships")
+    @param:Json(name = "starships")
     val starships: List<String>,
 
-    @Json(name = "vehicles")
+    @param:Json(name = "vehicles")
     val vehicles: List<String>,
 )
